@@ -1,5 +1,5 @@
-# Autonomous Synergistic 
-# Synchronicity Association
+# ASSA
+Autonomous Synergistic Synchronicity Association
 Tasked with pushing forward human consciousness and awareness.
 © 2019  - John D. Storey
 
