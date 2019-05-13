@@ -1,2 +1,2 @@
-# ASSA
-Autonomous Synergistic Synchronicity Association tasked with pushing forward human consciousness and awareness.
+# Autonomous Synergistic Synchronicity Association
+Tasked with pushing forward human consciousness and awareness.
