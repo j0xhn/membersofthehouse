@@ -68,7 +68,7 @@ Anyone can enter by different mechanisms:
 However, if one of the insights seems false, off, or harmful to the community the users can flag this comment.  This does cost tokens, however, if it receives enough to trigger an [investigation](#investigation) and it comes out that they are deemed innapropriate the person that flagged get's a reward so might get 2 tokens back for every 1 they flagged with.  Verified flags against users don't have any immediate impact, more just a “reputation” type score to show for later use.
 
 **Rewards**
-The final insight that make it to the top of the list is given the [IPP](#IPP) to split among it's supporters.  For example, the 1,000 USD on an insight with 2 (a)uthors, and 3 (s)takers at 60%, 30%, 10% respectively would recieve. `$100` a1 & a2, `$480` s1, `$240` s2, `$8` s3.
+The final insight that make it to the top of the list is given the [IPP](#IPP) to split among it's supporters.  For example, the 1,000 USD on an insight with 2 (a)uthors, and 3 (s)takers at 60%, 30%, 10% respectively would recieve. `$100` a1 & a2, `$480` s1, `$240` s2, `$80` s3.
 
 The top half are rewarded with the bottom half's staked tokens also proportionate to their voting weights.
 
