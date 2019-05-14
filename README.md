@@ -77,18 +77,6 @@ One could say this system is easily gamed, however voice credits cannot be bough
 In essence we gamify meditation, not just with badges but by actual incentives tied to USD.  The feedback loop is the very mechanism in which we have gamed our lives to chase money.  In our new system one must be on the pathway to enlightenment in order to win.
 
 ---
-### Instructors
-Instructor wants to publish a course and make money and build community.  I sign up because 
-- Existing Community
-- Tooling (subscription & payments)
-- Get voting rights in organization
-
-I create a course that is validated by 5 random validators.  It get’s approved and I receive 1 voting token.  Proceeds from this course go to me but 10% goes to escrow account as fee.
-At any point I can withdraw their tokens, taking out the equivalent of $ associated with the total in escrow.  
-
-1 token of 100k tokens, withdraw `$.1` of `$10k` escrow
-
----
 
 
 ### Definitions
@@ -98,7 +86,7 @@ At any point I can withdraw their tokens, taking out the equivalent of $ associa
 
 <strong id="ig">Insight Group:</strong> a group of insights put together in via the [Synchronicity Categorization Engine](#sce) 
 
-<strong id="vc">Voice Credit:</strong> a voting token within the organism, used to reward certain activities and used to stake on IPP insights.  These are not transferable.
+<strong id="vc">Voice Credit:</strong> a voting token within the organism, used to reward certain activities and used to stake on IPP.  These are not transferable.
 
 <strong id="voucher">Voucher:</strong> Anytime money is given to the organism, a voucher token is also given.  Vouchers can be burned at anytime, releasing their underlying value in proportion to how much is in the Pie.
 
