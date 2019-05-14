@@ -6,7 +6,7 @@ Pushing forward human consciousness through token mechanics and financial incent
  
 ---
 
-## Overview
+### Overview
 The general mechanism at play is that given a token that has greater value **in** network, we are more likely to increase the value of the network instead of withdraw.
 
 When a user meditates they recieve a [voice credit](#voice-credit) that they can use to vote on [insight groups](#ig).  The winner is whichever gains the most staked tokens.  In essense creating a win-win situation in which if everyone plays together, all will be rewarded.
