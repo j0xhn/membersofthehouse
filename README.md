@@ -72,9 +72,9 @@ The final insight that make it to the top of the list is given the [IPP](#IPP) t
 
 The top half are rewarded with the bottom half's staked tokens also proportionate to their voting weights.
 
-One could say this system is easily gamed, however voice credits cannot be bought, they must be earned through service to the organism or through meditation. So it creates an irresistable draw to be involved or meditate repeatedly in order to gain more tokens, which in turn give the platform more habitual repeat users and better marketability to sell to [appropriate-advertising](#aa).
+One could say this system is easily gamed, however voice credits cannot be bought, they must be earned through service to the organism or through meditation. So it creates an irresistable draw to be involved or meditate repeatedly in order to gain more tokens, which in turn give the platform more habitual repeat users and better marketability to sell to [appropriate advertising](#aa).
 
-In essence we gamify meditation, not just with badges but by actual incentives tied to USD.  The feedback loop is the very mechanism in which we have gamed our lives to chase money.  In our new system one must be on the pathway to enlightenment in order to win.
+In essence we gamify meditation, not just with badges but by actual incentives tied to USD. This binds financial and emotional well being together in a new and explosive way.
 
 ---
 
