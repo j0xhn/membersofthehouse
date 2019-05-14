@@ -16,7 +16,7 @@ Content creators are given [vouchers](#voucher) along with [voice credits](#voic
 ---
 
 
-## Assumptions
+### Assumptions
 The initial funds, courses and audience needed to start are made available to us.  We’ll assume a modest sum of a $10,946 endowment, 377 Guided Meditation audio files or 13 paid courses that already exist in the ecosystem.
 
 Roles appointed to members rely on random selection at the moment of need from the entire pool of eligible users, in essence forming a type of Jury Duty to help protect and serve the organism.
@@ -34,7 +34,7 @@ Acronyms and other definitions can be found by following their links or visiting
 
 
 ---
-## Personas
+### Personas
 
 
 **Typical User Tom:**
@@ -50,7 +50,7 @@ If they choose to, this token has unlocked the ability to vote on any insight, o
 
 ---
 
-## [π](#pi) in the sky
+### [π](#pi) in the sky
 Money for the [IPP](#IPP) comes from our [π](#pi) account which is filled in various ways:
 
 - Post meditation [blessings](#blessing)
@@ -77,7 +77,7 @@ One could say this system is easily gamed, however voice credits cannot be bough
 In essence we gamify meditation, not just with badges but by actual incentives tied to USD.  The feedback loop is the very mechanism in which we have gamed our lives to chase money.  In our new system one must be on the pathway to enlightenment in order to win.
 
 ---
-## Instructors
+### Instructors
 Instructor wants to publish a course and make money and build community.  I sign up because 
 - Existing Community
 - Tooling (subscription & payments)
@@ -91,7 +91,7 @@ At any point I can withdraw their tokens, taking out the equivalent of $ associa
 ---
 
 
-## Definitions
+### Definitions
 <strong id="poc">PoC:</strong> Proof of Consciousness
 
 <strong id="insight">Insight:</strong> a tweet sized text -- to be expanded to audio/video when applicable. The "stake" given by it's author at time of creation will determine it's place in the rankings. 
@@ -132,7 +132,7 @@ At any point I can withdraw their tokens, taking out the equivalent of $ associa
 
 ---
 
-## Attack Vectors
+### Attack Vectors
 
 ##### POC
 User just sets phone down, goes to sleep and are rewarded for 30 minutes of meditation
