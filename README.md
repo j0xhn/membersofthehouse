@@ -11,7 +11,7 @@ The general mechanism at play is that given a token that has greater value **in*
 
 When a user meditates they recieve a [voice credit](#voice-credit) that they can use to vote on [insight groups](#ig).  The winner is whichever gains the most staked tokens.  In essense creating a win-win situation in which if everyone plays together, all will be rewarded.
 
-Content creators are given [vouchers](#voucher) along with [voice credits](#voice-credit) and are free to withdraw their share of the [π](#pi) at anytime, but are incentivized to stay.  The more popular they can make the app, the more money their voucher tokens will be worth.
+Content creators are given [vouchers](#voucher) along with [voice credits](#voice-credit) and are able to withdraw their share of the [π](#pi) at anytime, but are incentivized to stay.  The more popular they can make the app, and the longer they stay in when other's leave, the more money their voucher tokens will be worth.
 
 ---
 
@@ -51,7 +51,7 @@ If they choose to, this token has unlocked the ability to vote on any insight, o
 ---
 
 ### [π](#pi) in the sky
-Money for the [IPP](#IPP) comes from our [π](#pi) account which is filled in various ways:
+Money in the shared escrow account, refered to as [π](#pi), is filled in various ways:
 
 - Post meditation [blessings](#blessing)
 - Paid courses
