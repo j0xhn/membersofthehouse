@@ -7,11 +7,15 @@ Pushing forward human consciousness through token mechanics and financial incent
 ---
 
 ### Overview
-The general mechanism at play is that given a token that has greater value **in** network, we are more likely to increase the value of the network instead of withdraw.
+The general mechanism at play is that the token holds it's value as a ratio of the collective holdings and has a fee associated to withdraw. Thus has greater value **in** network, and rewards users to keep their money in network.
 
-When a user meditates they recieve a [voice credit](#voice-credit) that they can use to vote on [insight groups](#ig).  The winner is whichever gains the most staked tokens.  In essense creating a win-win situation in which if everyone plays together, all will be rewarded.
+The short and sweet user story is that when a user meditates they recieve a [voice credit](#voice-credit) that they can use for various things through the app.  We hold compititions aproximately once a month to gain insights from the community and reward the users that create and interact with these insights.  In essense creating a win-win situation in which if everyone plays together, all will be rewarded -- but still leaves an open space for true market dynamics in which winners are sure to emerge.
 
-Content creators are given [vouchers](#voucher) along with [voice credits](#voice-credit) and are able to withdraw their share of the [π](#pi) at anytime, but are incentivized to stay.  The more popular they can make the app, and the longer they stay in when other's leave, the more money their voucher tokens will be worth.
+The organization behind all of this starts centralized and as it matures automates all roles and responsibilities via smart contracts.  Now instead of a central body directing priorities and solutions, it provides incentives and allows the wisdom of the crowd to prevail.
+
+This is revolutionary in the sense that current companies have 3 primary components -- owner, employee and consumer -- that don't have to be intertwined.  This new proposed model would enforce via code that in order to consume the material produced by the network, you would be willing to help curate and manage the material, and that you have a vested interest in the quality and longevity of the community itself. 
+
+In essence this aims to take "crowd sourced" companies such as Uber, AirBnB or even YouTube to the next level, by making people partners and co-creators rather than terminating nodes in their hiarcy of power.  The part make the whole, and the whole doesn't exist without the parts. We are all connected.
 
 ---
 
@@ -44,21 +48,25 @@ If choose to they are rewarded with 1 token for achieving the “first contribut
 
 *-- app wireframe here --*
 
-If they choose to, this token has unlocked the ability to vote on any insight, or course in order to take part in the [IPP](#IPP), or [flag](#flag) others through the app in order to gain more tokens or possibly financial bounty.
+If they choose to, this token has unlocked the ability to vote on any insight, or course in order to take part in the [PIP](#PIP), or [flag](#flag) others through the app in order to gain more tokens or possibly financial bounty.
 
 *-- flag wireframe here --*
 
 ---
 
 ### [π](#pi) in the sky
+<<<<<<< HEAD
 Money in the shared escrow account, refered to as [π](#pi), is filled in various ways:
+=======
+Money for the [PIP](#PIP) comes from our [π](#pi) account which is filled in various ways:
+>>>>>>> small updates to readme
 
 - Post meditation [blessings](#blessing)
 - Paid courses
 - Investors
 - Promotions & Advertising (no vouchers given)
 
-User sees a banner that says “Come, sit with us and win your part of $1,534”.  The amount in the [Insight Periodic Prize](#IPP) is determined at first by a board of members, but will eventually be a jury of validators.  
+User sees a banner that says “Come, sit with us and win your part of $1,534”.  The amount in the [Periodic Insight Prize](#PIP) is determined at first by a board of members, but will eventually be a jury of validators.  
 
 Anyone can enter by different mechanisms:
 
@@ -68,7 +76,7 @@ Anyone can enter by different mechanisms:
 However, if one of the insights seems false, off, or harmful to the community the users can flag this comment.  This does cost tokens, however, if it receives enough to trigger an [investigation](#investigation) and it comes out that they are deemed innapropriate the person that flagged get's a reward so might get 2 tokens back for every 1 they flagged with.  Verified flags against users don't have any immediate impact, more just a “reputation” type score to show for later use.
 
 **Rewards**
-The final insight that make it to the top of the list is given the [IPP](#IPP) to split among it's supporters.  For example, the 1,000 USD on an insight with 2 (a)uthors, and 3 (s)takers at 60%, 30%, 10% respectively would recieve. `$100` a1 & a2, `$480` s1, `$240` s2, `$80` s3.
+The final insight that make it to the top of the list is given the [PIP](#PIP) to split among it's supporters.  For example, the 1,000 USD on an insight with 2 (a)uthors, and 3 (s)takers at 60%, 30%, 10% respectively would recieve. `$100` a1 & a2, `$480` s1, `$240` s2, `$80` s3.
 
 The top half are rewarded with the bottom half's staked tokens also proportionate to their voting weights.
 
@@ -86,7 +94,7 @@ In essence we gamify meditation, not just with badges but by actual incentives t
 
 <strong id="ig">Insight Group:</strong> a group of insights put together in via the [Synchronicity Categorization Engine](#sce) 
 
-<strong id="vc">Voice Credit:</strong> a voting token within the organism, used to reward certain activities and used to stake on IPP.  These are not transferable.
+<strong id="vc">Voice Credit:</strong> a voting token within the organism, used to reward certain activities and used to stake on PIP.  These are not transferable.
 
 <strong id="voucher">Voucher:</strong> Anytime money is given to the organism, a voucher token is also given.  Vouchers can be burned at anytime, releasing their underlying value in proportion to how much is in the Pie.
 
@@ -106,13 +114,13 @@ In essence we gamify meditation, not just with badges but by actual incentives t
 
 <strong id="list">List</strong>: the list of insight blocks that can be down and upvoted with extra tokens or even purchased tokens.  The purchasable tokens are the tokens raised in the initial coin offering, or possibly even just by the organization that is running the app. Their effect follows quadratic voting policies.
 
-<strong id="blessing">Blessing</strong>: A donation left to the app after a course is listened to.  Each author get’s to set their own ratio? Or possibly preset at 50% to publisher, 3% to App, 47% to IPP.
+<strong id="blessing">Blessing</strong>: A donation left to the app after a course is listened to.  Each author get’s to set their own ratio? Or possibly preset at 50% to publisher, 3% to App, 47% to PIP.
 
 <strong id="QV">Quadratic Voting</strong>:  A mechanism for minimizing a voting token’s weight when applied in mass to achieve the greatest amount of consent and protects against majority rule by following a mathematical weighting rule for votes. https://en.wikipedia.org/wiki/Quadratic_voting
 
 <strong id="prize">Prize</strong>:  The incentive to submit insights or courses, as well as to vote on others’, and participate in general.  Prize is divided by primarily the one that creates, but also proportionate to how many people have voted on it relative to its winning.
 
-<strong id="IPP">Insight Periodic Prize</strong>: A monetary prize that is rewarded on a lunar cycle to be split among participants.  10% to author, 90% to all token holders that voted it up, proportionate to their tokens spent. 
+<strong id="PIP">Insight Periodic Prize</strong>: A monetary prize that is rewarded on a lunar cycle to be split among participants.  10% to author, 90% to all token holders that voted it up, proportionate to their tokens spent. 
 
 <strong id="CPP">Course Periodic Prize</strong>: A monetary prize that is rewarded quarterly to the top submitted courses.
 
