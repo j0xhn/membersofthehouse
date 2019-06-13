@@ -55,11 +55,7 @@ If they choose to, this token has unlocked the ability to vote on any insight, o
 ---
 
 ### [π](#pi) in the sky
-<<<<<<< HEAD
-Money in the shared escrow account, refered to as [π](#pi), is filled in various ways:
-=======
 Money for the [PIP](#PIP) comes from our [π](#pi) account which is filled in various ways:
->>>>>>> small updates to readme
 
 - Post meditation [blessings](#blessing)
 - Paid courses
