@@ -7,54 +7,33 @@ Pushing forward human consciousness through token mechanics and financial incent
 ---
 
 ### Overview
-The general mechanism at play is that the token holds it's value as a ratio of the collective holdings and has a fee associated to withdraw. Thus has greater value **in** network, and rewards users to keep their money in network.
+The general mechanism at play is that the token holds it's value as a ratio of the collective holdings. Each owner can withdraw at any point, but pays a fee when they do so. Thus the currency has greater value **in** network, and rewards users to keep their money circulating amongst each other than cashing out.
 
-The short and sweet user story is that when a user meditates they recieve a [voice credit](#voice-credit) that they can use for various things through the app.  We hold compititions aproximately once a month to gain insights from the community and reward the users that create and interact with these insights.  In essense creating a win-win situation in which if everyone plays together, all will be rewarded -- but still leaves an open space for true market dynamics in which winners are sure to emerge.
+Traditional businesses have clear lines between consumers, employees and shareholders.  Our model blurs these lines by requiring a participant to be all 3.
 
-The organization behind all of this starts centralized and as it matures automates all roles and responsibilities via smart contracts.  Now instead of a central body directing priorities and solutions, it provides incentives and allows the wisdom of the crowd to prevail.
+This new proposed model would enforce via code that in order to consume the paid material produced by the network, you would need to be willing to help curate and manage the material, and that you have a vested interest in the quality and longevity of the community itself. 
 
-This is revolutionary in the sense that current companies have 3 primary components -- owner, employee and consumer -- that don't have to be intertwined.  This new proposed model would enforce via code that in order to consume the material produced by the network, you would be willing to help curate and manage the material, and that you have a vested interest in the quality and longevity of the community itself. 
-
-In essence this aims to take "crowd sourced" companies such as Uber, AirBnB or even YouTube to the next level, by making people partners and co-creators rather than terminating nodes in their hiarcy of power.  The part make the whole, and the whole doesn't exist without the parts. We are all connected.
-
----
-
-
-### Assumptions
-The initial funds, courses and audience needed to start are made available to us.  We’ll assume a modest sum of a $10,946 endowment, 377 Guided Meditation audio files or 13 paid courses that already exist in the ecosystem.
-
-Roles appointed to members rely on random selection at the moment of need from the entire pool of eligible users, in essence forming a type of Jury Duty to help protect and serve the organism.
-
-All numbers, ratios and amounts in the examples below should be viewed as variables and subject to change.  Ideally being able to be adjusted dynamically by the group as the org grows and faces new challenges.
-
-We will never be able to stop bad actors fully.  At the end of the day, it’s a system of humans and they can be threatened, bullied or bribed off-chain.  We accept this vulnerability the same way we accept the risk of existing in the world and seek to build the group with care.  For this reason the role of citizenship officer is very important.
-
-There is a mechanism for attaching identities to users making civil attacks by bots hard to achieve.  A user could hypothetically have multiple accounts, but we hope through AI assistance of comparing photos to spot these duplicate accounts.
-
-The persons that initially starts this group will not immediately decentralize it.  In order to move quickly and prove out different hypothesis the product will be built on a web 2.0 stack until the ecosystem is mature enough to support itself, at which point the persons will work on decentralizing the tech stack and all associated responsibilities.
-
-Acronyms and other definitions can be found by following their links or visiting the [definitions](#definitions).
-
-
+In essence this aims to take "crowd" companies such as Uber, AirBnB or even YouTube to the next level, by making people partners and co-creators rather than terminating nodes in their hiarcy of power.
 
 ---
 ### Personas
 
 
-**Typical User Tom:**
+**Typical User Tom**
 User hears about app that rewards users for meditating.  They signup, go through traditional app flow, nothing different than normal, at end they are asked to give an insight they gleaned from their meditation along with a blessing or donation.  If they choose not to, no worries, they continue to use the app as normal.
 
 If choose to they are rewarded with 1 token for achieving the “first contribution” badge. They can find out what this means by learning more, or just go on meditating as normal and forget all about it.
 
 *-- app wireframe here --*
 
-If they choose to, this token has unlocked the ability to vote on any insight, or course in order to take part in the [PIP](#PIP), or [flag](#flag) others through the app in order to gain more tokens or possibly financial bounty.
+If they choose to, this token has unlocked the ability to vote on any insight and allowed them to take part in the [PIP](#PIP), or [flag](#flag) others through the app in order to gain more tokens or a possible financial bounty.
 
 *-- flag wireframe here --*
 
 ---
 
 ### [π](#pi) in the sky
+
 Money for the [PIP](#PIP) comes from our [π](#pi) account which is filled in various ways:
 
 - Post meditation [blessings](#blessing)
@@ -81,6 +60,24 @@ One could say this system is easily gamed, however voice credits cannot be bough
 In essence we gamify meditation, not just with badges but by actual incentives tied to USD. This binds financial and emotional well being together in a new and explosive way.
 
 ---
+
+---
+
+
+### Assumptions
+The initial funds, courses and audience needed to start are made available to us.  We’ll assume a modest sum of a $10,946 endowment, 377 Guided Meditation audio files or 13 paid courses that already exist in the ecosystem.
+
+Roles appointed to members rely on random selection at the moment of need from the entire pool of eligible users, in essence forming a type of Jury Duty to help protect and serve the organism.
+
+All numbers, ratios and amounts in the examples below should be viewed as variables and subject to change.  Ideally being able to be adjusted dynamically by the group as the org grows and faces new challenges.
+
+We will never be able to stop bad actors fully.  At the end of the day, it’s a system of humans and they can be threatened, bullied or bribed off-chain.  We accept this vulnerability the same way we accept the risk of existing in the world and seek to build the group with care.  For this reason the role of citizenship officer is very important.
+
+There is a mechanism for attaching identities to users making civil attacks by bots hard to achieve.  A user could hypothetically have multiple accounts, but we hope through AI assistance of comparing photos to spot these duplicate accounts.
+
+The persons that initially starts this group will not immediately decentralize it.  In order to move quickly and prove out different hypothesis the product will be built on a web 2.0 stack until the ecosystem is mature enough to support itself, at which point the persons will work on decentralizing the tech stack and all associated responsibilities.
+
+Acronyms and other definitions can be found by following their links or visiting the [definitions](#definitions).
 
 
 ### Definitions
@@ -116,7 +113,7 @@ In essence we gamify meditation, not just with badges but by actual incentives t
 
 <strong id="prize">Prize</strong>:  The incentive to submit insights or courses, as well as to vote on others’, and participate in general.  Prize is divided by primarily the one that creates, but also proportionate to how many people have voted on it relative to its winning.
 
-<strong id="PIP">Insight Periodic Prize</strong>: A monetary prize that is rewarded on a lunar cycle to be split among participants.  10% to author, 90% to all token holders that voted it up, proportionate to their tokens spent. 
+<strong id="PIP">Periodic Insight Prize</strong>: A monetary prize that is rewarded on a lunar cycle to be split among participants.  10% to author, 90% to all token holders that voted it up, proportionate to their tokens spent. 
 
 <strong id="CPP">Course Periodic Prize</strong>: A monetary prize that is rewarded quarterly to the top submitted courses.
 
