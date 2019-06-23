@@ -135,4 +135,5 @@ Require that users give “insight” within 30 seconds of ending. Something tha
 - User finds out who the validators or jury members are and bribes / threatens / extorted them to vote a certain way.
 Whistleblower rewards
   - No way to fully protect against this.
+  - Is meant to actually be a model for how our taxes work.  The success of this model might lead to a breakthrough in social contracts and escrow accounts like HOA and Governmental roles.
 
