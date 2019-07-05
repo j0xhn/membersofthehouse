@@ -1,6 +1,6 @@
 # NASA
 **N**utritious **A**utonomous 
-**S**nack **A**ssociation
+**S**nack **A**lliance
 
 Pushing forward a healthy workplace via the power of culture and voting.  MVP manifests itself as a tool for giving feedback to Wayfair, starting with general feedback near snack walls.
 🌱🙇📣🙇🌱
