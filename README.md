@@ -27,7 +27,26 @@ Two weeks later he get's an update that one of the topics he upvoted has had a t
 
 ---
 ### Survey
-Here is a link to the google form survey that they would be direct to: [http://bit.ly/2Ga8C3d](http://bit.ly/2Ga8C3d) but it looks like this:
+I've created a sample google form survey that they would be directed to via [http://bit.ly/2Ga8C3d](http://bit.ly/2Ga8C3d) that looks like this:
+![Survey](images/survey-screenshot.png)
+
+However, if proven successfull I would like a chrome extension that then is used to send followup questions or incentivize other feedback in the future.  I already have a development basic version of this setup if you'd like to see it.
+
+
+---
+### Metrics & Outstanding Questions
+Our goal is to collect 100 responses.  It will be interesting to see how many of the comments are actionable and how many wayfair is already workin on, or possibly already implicated.
+
+- What impact can people *really* have on the snack choices?
+- How much money per employee is dedicated to snacks?
+- Is a list of all snacks and costs available?
+- Is it possible to have different snacks in different kitchens?
+- Can we introduce new food choices?  Like veggies in the mornings as well as fruit?
+
+
+
+
+
 
 
 
