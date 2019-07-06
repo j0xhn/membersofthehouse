@@ -25,5 +25,10 @@ The form also asks for general feedback about Wayfair, to which he gives his rev
 
 Two weeks later he get's an update that one of the topics he upvoted has had a ticket submitted and is actually being worked on by the org.  He feels empowered to voice his opinion and knows where to go next time he has something to give feedback on.
 
+---
+### Survey
+Here is a link to the google form survey that they would be direct to: [http://bit.ly/2Ga8C3d](http://bit.ly/2Ga8C3d) but it looks like this:
+
+
 
 
