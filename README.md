@@ -6,11 +6,11 @@ Pushing forward a healthy workplace via the power of culture and voting.  MVP ma
 
 📉🙇📣🙇📈
 
-[ ] Snacks
-[ ] Charitable Donations (Walkout Issue)
-[ ] Health & Wellness (Gym Passes)
-[ ] Culture (Pod Outings & Parties)
-[ ] Vision (Values & Priorities)
+- [x] Snacks
+- [ ] Charitable Donations (Walkout Issue)
+- [ ] Health & Wellness (Gym Passes)
+- [ ] Culture (Pod Outings & Parties)
+- [ ] Vision (Values & Priorities)
  
 ---
 
