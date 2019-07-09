@@ -3,12 +3,14 @@
 **S**nack **A**lliance
 
 Pushing forward a healthy workplace via the power of culture and voting.  MVP manifests itself as a tool for giving feedback to Wayfair, starting with general feedback near snack walls but leads to automating all kinds of decesions through the org.
+
 📉🙇📣🙇📈
-[] Snacks
-[] Charitable Donations (Walkout Issue)
-[] Health & Wellness (Gym Passes)
-[] Culture (Pod Outings & Parties)
-[] Vision (Values & Priorities)
+
+[ ] Snacks
+[ ] Charitable Donations (Walkout Issue)
+[ ] Health & Wellness (Gym Passes)
+[ ] Culture (Pod Outings & Parties)
+[ ] Vision (Values & Priorities)
  
 ---
 
