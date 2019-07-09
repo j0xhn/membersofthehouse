@@ -35,7 +35,8 @@ Two weeks later he get's an update that one of the topics he upvoted has had a t
 ---
 ### Survey
 I've created a sample google form survey that they would be directed to via [http://bit.ly/2Ga8C3d](http://bit.ly/2Ga8C3d) that looks like this:
-![Survey](images/survey-screenshot.png)
+
+<img src="images/survey-screenshot.png" width="500" />
 
 However, if proven successfull I would like a chrome extension that then is used to send followup questions or incentivize other feedback in the future.  I already have a development basic version of this setup if you'd like to see it.
 
