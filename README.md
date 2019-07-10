@@ -1,7 +1,8 @@
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/NASA_logo.svg/200px-NASA_logo.svg.png" />
 
-**N**oninvasive **A**utonomous 
-**S**nack **A**lliance
+**N**oninvasive **A**utonomous **S**nack **A**lliance (NASA)
+**Wa**fair **F**eedback **A**pp (WAFA)
+
 
 Pushing forward a healthy workplace via the power of culture and voting.  MVP manifests itself as a tool for giving feedback to Wayfair, starting with general feedback near snack walls but leads to automating all kinds of decesions through the org.
 
