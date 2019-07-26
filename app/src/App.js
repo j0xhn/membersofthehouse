@@ -19,19 +19,30 @@ const snacks = [
 ];
 
 function App() {
-  const [budget] = useState(10);
+  const totalBudget = 10
+  const [budget, setBudget] = useState(10);
+  const handleChange = (e, value) => {
+    console.log('v', value)
+  }
   return (
     <div className="App">
       <header className="App-header">
-        <h1>{budget}</h1>
+        <span style={{marginBottom: '50px', fontSize: '14px'}}>allocate:
+        <span style={{fontSize: '50px'}}>${budget}/</span>
+        ${totalBudget}
+        </span>
         <div>
         {snacks.map(category => <div>
-          {/* {category.title} */}
-          {category.options.map(snack => <div key={snack.title} style={{display: 'flex'}}>
-            {snack.title}
-            {/* <small>{` $${snack.price}`}</small> */}
+          {category.options.map(snack => <div 
+            key={snack.title} 
+            style={{display: 'flex', alignItems: 'flex-end', marginBottom: '40px'}}>
+            <div style={{width: '200px', textAlign: 'right', marginRight: '20px'}}> {snack.title}</div>
             <Slider
-              defaultValue={0}
+              style={{width: '200px'}}
+              max={budget}
+              step={.1}
+              defaultValue={snack.price}
+              onChangeCommitted={handleChange}
               getAriaValueText={() => 'input'}
               aria-labelledby="discrete-slider-always"
               valueLabelDisplay="on"
