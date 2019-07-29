@@ -9,8 +9,8 @@ import Logo from './Components/logo'
 const snacks = [
   { title: 'Cookies',
     options: [
-      { title: 'Oreos', price: 1 },
-      { title: 'Chocolate Chip', price: 1.1 }
+      { title: 'Oreos', price: 1, allocation: 1 },
+      { title: 'Chocolate Chip', price: 1.1, allocation: 1 }
     ]
   }, {
     title: 'Vegetables',
@@ -22,9 +22,19 @@ const snacks = [
   },
 ];
 
+const getDefaults = snacks => {
+  return {
+    Carrots: 3,
+    Hummus: 5,
+    Oreos: 2
+
+  }
+}
+
 function App() {
   const totalBudget = 10
   const [allocatedBudget, setBudget] = useState(10);
+  const [allocations, setAllocations] = useState(getDefaults(snacks))
   const handleChange = (e, value) => {
     console.log('v', value)
   }
