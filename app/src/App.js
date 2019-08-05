@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import './App.css';
 import './Shorthand.css';
 import Slider from '@material-ui/core/Slider';
+import Snackbar from '@material-ui/core/Snackbar';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Logo from './Components/logo'
@@ -34,6 +35,7 @@ const getDefaults = snacks => {
 function App() {
   const totalBudget = 10
   const [allocatedBudget, setBudget] = useState(10);
+  const [snackMessage, setMessage] = useState("This feedback will be taken into consideration along with many other factors to determine the snacks.  Even if you can't find the snack you'd like, please take a minute to be grateful for the plethora of snack choices here at Wayfair ;)")
   const [allocations, setAllocations] = useState(getDefaults(snacks))
   const handleChange = (e, value) => {
     console.log('v', value)
@@ -41,7 +43,7 @@ function App() {
   return (
     <div className="App tac pt20">
         <Logo text={<h1 className='fs1 relative'> 
-              <span className="absolute fsXLarge" style={{top: '15px', left: '-20px'}}>$</span>
+              {/* <span className="absolute fsXLarge" style={{top: '15px', left: '-20px'}}>₻</span> */}
               {allocatedBudget} 
             </h1>} orbit={false} />
         {snacks.map(category => <div key={category.title} className='flex column w100p'>
@@ -74,6 +76,15 @@ function App() {
         <div className='m20 w100p'>
           <Button className='w100p' variant="contained" color="primary">Blast Off!</Button>
         </div>
+        <Snackbar
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        open={snackMessage}
+        onClose={()=> setMessage(null)}
+        ContentProps={{
+          'aria-describedby': 'message-id',
+        }}
+        message={<span>{snackMessage}</span>}
+      />
     </div>
   );
 }
