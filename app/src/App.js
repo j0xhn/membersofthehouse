@@ -40,29 +40,30 @@ function App() {
   const [snackMessage, setMessage] = useState("This feedback will be taken into consideration along with many other factors to determine the snacks.  Even if you can't find the snack you'd like, please take a minute to be grateful for the plethora of snack choices here at Wayfair 🙇‍")
   const [budget, setBudget] = useState(10);
   const [allocations, setAllocation] = useState(getDefaults(snackCats))
+  const total = Object.values(allocations).reduce((acc,allo) => acc + allo)
 
   const handleChange = ({id, value}) => {
     // const spentBudget = Object.values(allocations).reduce((acc, allo) => acc + allo)
     // const remaningBudget = totalBudget - spentBudget
-    console.log('allocations', allocations)
-    console.log('id', id)
-    
-    const total = Object.values(allocations).reduce((acc,allo) => acc + allo)
-    const shouldSet = value < allocations[id]
-    console.log('total: ', total);
-    if (shouldSet) { 
+    // console.log('allocations', allocations)
+    const currentAllo = allocations[id]
+    const hypotheticalTotal = total - currentAllo + value
+    const isDecreasing = value < currentAllo
+    const isLessThanTotal = hypotheticalTotal <= totalBudget 
+    if (isDecreasing || isLessThanTotal) { 
       setAllocation({
         ...allocations, 
-        [id]: value,
+        [id]: value
       })
     }
   }
 
   return (
     <div className="App tac pt20">
-        <Logo text={<h1 className='fs1 relative'> 
-              {/* <span className="absolute fsXLarge" style={{top: '15px', left: '-20px'}}>₻</span> */}
-              {budget} 
+        <Logo text={<h1 className='fs1 relative flex column'> 
+              {/* <span className="absolute fsXLarge" style={{top: '15px', left: '-20px'}}>{totalBudget}</span> */}
+              {total} 
+              {/* <span style={{fontSize: '10px'}}>{`of ${totalBudget}`}</span> */}
             </h1>} orbit={false} />
         {snackCats.map(category => <div key={category.id} className='flex column w100p'>
           {category.options.map(snack => <div 
@@ -98,7 +99,7 @@ function App() {
         </div>
         <Snackbar
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-        open={!!snackMessage}
+        open={!snackMessage}
         onClose={()=> setMessage(null)}
         ContentProps={{
           'aria-describedby': 'message-id',
