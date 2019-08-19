@@ -48,7 +48,10 @@ const snackCats = [
 const getDefaults = snackCats => {
   let defaults = {}
   snackCats.forEach(cat => cat.options.forEach(snack => 
-    defaults[snack.id] = snack.defaultAllo
+    defaults[cat.id] = {
+      ...defaults[cat.id],
+      [snack.id]: snack.defaultAllo
+    }
   ))
   return defaults
 }
@@ -72,10 +75,12 @@ function App() {
   // const [snackMessage, setMessage] = useState(`You have ${budget} voice credits to allocate, choose wisely `)
   const [snackMessage, setMessage] = useState(null)
   const [allocations, setAllocation] = useState(getDefaults(snackCats))
-  const total = Object.values(allocations).reduce((acc,allo) => acc + allo)
+  const total = Object.values(allocations)
+    .reduce((acc, cats) => ([...acc, ...cats]), [])
+    .reduce((acc,allo) => acc + allo)
   const showTerms = () => setMessage(terms) 
 
-  const handleChange = ({id, value}) => {
+  const handleChange = ({id, cid, value}) => {
     const currentAllo = allocations[id]
     const hypotheticalTotal = total - currentAllo + value
     const isDecreasing = value < currentAllo
@@ -83,19 +88,31 @@ function App() {
     if (isDecreasing || isLessThanTotal) { 
       setAllocation({
         ...allocations, 
-        [id]: value
+        [cid]:{
+          ...allocations[cid],
+          [id]: value
+        }
       })
     }
   }
 
   return (
     <div className="App tac">
-      <div className='flex jcc aife'>
+      <div className='flex jcc aife mt30'>
         <span className='fs1'> {Math.round( total * 10) / 10}</span>
         <span>/{budget}</span>
       </div>
-      <p className='fs16 mb80'>budget wisely my friend 🤔</p>
-      {snackCats.map(category => <div key={category.id} className='flex column w100p'>
+      <p className='fs16 mb30'>budget wisely my friend 🤔</p>
+      <div className='flex'>
+      {snackCats.map(cat => 
+        <Card 
+          {...cat} 
+          allos={allocations[cat.id]}
+          key={cat.id}
+          className='m10' 
+        />)}
+      </div>
+      {/* {snackCats.map(category => <div key={category.id} className='flex column w100p'>
         {category.options.map(snack => <div 
           key={snack.id} 
           className="flex mb40 jcc tar">
@@ -115,8 +132,7 @@ function App() {
             valueLabelDisplay="on"
           />
         </div>)}
-      </div>)}
-      <Card />
+      </div>)} */}
       <div className='mb50 w100p'>
         <Button 
           variant="contained" 

@@ -41,16 +41,23 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function RecipeReviewCard() {
+export default function RecipeReviewCard({
+  title,
+  id,
+  options,
+  allos,
+  className
+}) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
+  console.log('allos', allos)
 
   function handleExpandClick() {
     setExpanded(!expanded);
   }
 
   return (
-    <Card className={classes.card}>
+    <Card className={`${classes.card} ${className}`}>
       <CardHeader
         avatar={
           <Avatar aria-label="recipe" className={classes.avatar}>
