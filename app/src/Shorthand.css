@@ -3,6 +3,7 @@
 .row { flex-direction: row;}
 .jcc { justify-content: center;}
 .aic { align-items: center;}
+.aife { align-items: flex-end;}
 .flexCenter { display: flex; justify-content: center; align-items: center;}
 
 .tac { text-align: center; }
@@ -11,12 +12,15 @@
 
 .txtWhite { color: #fff;}
 .bgBlue { background-color: #0b3d91; }
-
+.txtBlue { color: #0b3d91; }
+.txtGray { color: gray; }
 .ellipsis {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.pointer { cursor: pointer }
+.underline { text-decoration: underline; }
 
 .mb10 { margin-bottom: 10px;}
 .mb20 { margin-bottom: 20px;}
@@ -33,6 +37,7 @@
 .pt10 { padding-top: 10px; }
 .pt20 { padding-top: 20px; }
 .pt30 { padding-top: 30px; }
+.m0a { margin: 0 auto; }
 .m10 { margin: 10px; }
 .m20 { margin: 20px; }
 .m30 { margin: 30px; }
@@ -60,10 +65,19 @@
 
 .br50 { border-radius: 50%; }
 
-.fs1 { font-size: 100px; }
+.fs1 { font-size: 100px; line-height: 80px; }
+.fs10 { font-size: 10px; }
+.fs12 { font-size: 12px; }
+.fs14 { font-size: 14px; }
+.fs16 { font-size: 16px; }
 .fsDefault { font-size: default; }
 .fsXLarge { font-size: x-large; }
 .fsLargert { font-size: larger; }
 
 .relative { position: relative;}
 .absolute { position: absolute;}
+.fixed { position: fixed;}
+.top10 { top: 10px}
+.top20 { top: 20px}
+.left0 { left: 0px}
+.right0 { right: 0px}

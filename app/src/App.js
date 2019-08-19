@@ -1,12 +1,30 @@
+/* eslint-disable jsx-a11y/accessible-emoji */
 import React, {useState} from 'react';
 import './App.css';
 import './Shorthand.css';
 import Slider from '@material-ui/core/Slider';
+import Tooltip from '@material-ui/core/Tooltip';
 import Snackbar from '@material-ui/core/Snackbar';
-import TextField from '@material-ui/core/TextField';
+import terms from './terms'
+import Card from './components/card'
 import Button from '@material-ui/core/Button';
-import Logo from './Components/logo'
+import {generateUID} from './utils'
+import Airtable from 'airtable'
 
+/* 
+*
+* INITIAL SETUP
+*
+*/
+const base = new Airtable({apiKey: process.env.REACT_APP_AIRTABLE_KEY}).base('appVnznDLeNrQGLnE');
+const uid = localStorage.getItem('hasa_uid')
+if (!uid) localStorage.setItem('hasa_uid', generateUID())
+
+/* 
+*
+* DATA -- replace with API call when ready
+*
+*/
 const snackCats = [
   { title: 'Cookies',
     id: 'c1',
@@ -30,22 +48,39 @@ const snackCats = [
 const getDefaults = snackCats => {
   let defaults = {}
   snackCats.forEach(cat => cat.options.forEach(snack => 
-    defaults[snack.id] = snack.defaultAllo
+    defaults[cat.id] = {
+      ...defaults[cat.id],
+      [snack.id]: snack.defaultAllo
+    }
   ))
   return defaults
 }
 
+
 function App() {
   const totalBudget = 10
-  const [snackMessage, setMessage] = useState("This feedback will be taken into consideration along with many other factors to determine the snacks.  Even if you can't find the snack you'd like, please take a minute to be grateful for the plethora of snack choices here at Wayfair 🙇‍")
-  const [budget, setBudget] = useState(10);
-  const [allocations, setAllocation] = useState(getDefaults(snackCats))
-  const total = Object.values(allocations).reduce((acc,allo) => acc + allo)
+  const [budget] = useState(10);
 
-  const handleChange = ({id, value}) => {
-    // const spentBudget = Object.values(allocations).reduce((acc, allo) => acc + allo)
-    // const remaningBudget = totalBudget - spentBudget
-    // console.log('allocations', allocations)
+  const onSubmit = () => {
+    base('Table 1').create({id: uid, ...allocations}, function(err, record) {
+      if (err) {
+        console.error(err);
+        return;
+      } else {
+        setMessage('Save Successfull')
+      }
+    });
+  }
+  
+  // const [snackMessage, setMessage] = useState(`You have ${budget} voice credits to allocate, choose wisely `)
+  const [snackMessage, setMessage] = useState(null)
+  const [allocations, setAllocation] = useState(getDefaults(snackCats))
+  const total = Object.values(allocations)
+    .reduce((acc, cats) => ([...acc, ...cats]), [])
+    .reduce((acc,allo) => acc + allo)
+  const showTerms = () => setMessage(terms) 
+
+  const handleChange = ({id, cid, value}) => {
     const currentAllo = allocations[id]
     const hypotheticalTotal = total - currentAllo + value
     const isDecreasing = value < currentAllo
@@ -53,57 +88,68 @@ function App() {
     if (isDecreasing || isLessThanTotal) { 
       setAllocation({
         ...allocations, 
-        [id]: value
+        [cid]:{
+          ...allocations[cid],
+          [id]: value
+        }
       })
     }
   }
 
   return (
-    <div className="App tac pt20">
-        <Logo text={<h1 className='fs1 relative flex column'> 
-              {/* <span className="absolute fsXLarge" style={{top: '15px', left: '-20px'}}>{totalBudget}</span> */}
-              {total} 
-              {/* <span style={{fontSize: '10px'}}>{`of ${totalBudget}`}</span> */}
-            </h1>} orbit={false} />
-        {snackCats.map(category => <div key={category.id} className='flex column w100p'>
-          {category.options.map(snack => <div 
-            key={snack.id} 
-            className="flex mb40 jcc tar">
+    <div className="App tac">
+      <div className='flex jcc aife mt30'>
+        <span className='fs1'> {Math.round( total * 10) / 10}</span>
+        <span>/{budget}</span>
+      </div>
+      <p className='fs16 mb30'>budget wisely my friend 🤔</p>
+      <div className='flex'>
+      {snackCats.map(cat => 
+        <Card 
+          {...cat} 
+          allos={allocations[cat.id]}
+          key={cat.id}
+          className='m10' 
+        />)}
+      </div>
+      {/* {snackCats.map(category => <div key={category.id} className='flex column w100p'>
+        {category.options.map(snack => <div 
+          key={snack.id} 
+          className="flex mb40 jcc tar">
+          <Tooltip title={snack.title} placement="top">
             <div className='ellipsis mr20 mw150'> {snack.title}</div>
-            <Slider
-              className='mw150'
-              id={snack.id}
-              name={snack.id}
-              max={budget}
-              step={.1}
-              value={allocations[snack.id]}
-              onChange={(e,value) => handleChange({id: snack.id, value})}
-              getAriaValueText={() => 'input'}
-              aria-labelledby="discrete-slider-always"
-              valueLabelDisplay="on"
-            />
-          </div>)}
+          </Tooltip>
+          <Slider
+            className='mw150'
+            id={snack.id}
+            name={snack.id}
+            max={budget}
+            step={.1}
+            value={allocations[snack.id]}
+            onChange={(e,value) => handleChange({id: snack.id, value})}
+            getAriaValueText={() => 'input'}
+            aria-labelledby="discrete-slider-always"
+            valueLabelDisplay="on"
+          />
         </div>)}
-        <TextField
-          className='w300'
-          label="Feedback"
-          multiline
-          rows="4"
-          variant='outlined'
-          placeholder="Additional comments on how to improve Wayfair"
-          helperText="* required"
-          margin="normal"
-        />
-        <div className='m20 w100p'>
-          <Button className='w100p' variant="contained" color="primary">Blast Off!</Button>
-        </div>
-        <Snackbar
-        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-        open={!snackMessage}
+      </div>)} */}
+      <div className='mb50 w100p'>
+        <Button 
+          variant="contained" 
+          color="primary"
+          onClick={onSubmit}
+          >
+            Blast Off! 🚀
+          </Button>
+      </div>
+      <small className='fs10 w300 txtGray'>This app is an expirement and may or <strong className='underline'>may not</strong> impact snack choices.  Thank you for your help in making Wayfair a great place to work and snack </small>
+      <p className='mb20'>🙇‍♂️</p>
+      <div onClick={showTerms} className='fs10 w300 txtBlue pointer underline mb50'>terms and conditions</div>
+      <Snackbar
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+        open={!!snackMessage}
         onClose={()=> setMessage(null)}
-        ContentProps={{
-          'aria-describedby': 'message-id',
-        }}
+        ContentProps={{ 'aria-describedby': 'message-id', }}
         message={<span>{snackMessage}</span>}
       />
     </div>

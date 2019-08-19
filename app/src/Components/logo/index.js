@@ -1,6 +1,7 @@
 import React from 'react'
 import './style.css'
-export default ({ text, orbit = true }) =>
+export default ({ text, orbit = true, children }) =>
+<div className="relative w100p">
 <div className="container">
   <div className="outer"></div>
   <div className="text">{text}</div>
@@ -51,4 +52,6 @@ export default ({ text, orbit = true }) =>
   <div className="bstar" id="big3"><div></div><div></div><div></div><div></div></div>
   <div className="bstar" id="big4"><div></div><div></div><div></div><div></div></div>
   <div className="bstar" id="big5"><div></div><div></div><div></div><div></div></div>
+</div>
+  {children}
 </div>
