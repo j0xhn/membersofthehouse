@@ -7,3 +7,9 @@ export const generateUID = () => {
   secondPart = ("000" + secondPart.toString(36)).slice(-3);
   return firstPart + secondPart;
 }
+
+export const mapAirtableValues = values => values.map(value => ({
+  ...value.fields,
+  id: value.id,
+  Record: value
+}))
