@@ -47,7 +47,7 @@ function App() {
   }
   
   const total = Object.values(allos)
-    .reduce((acc,allo) => Number(acc) + Number(allo), [])
+    .reduce((acc,allo) => Number(acc) + Number(allo), 0)
 
   const showTerms = () => setMessage(terms) 
 
@@ -57,7 +57,6 @@ function App() {
     const isDecreasing = value < currentAllo
     const isLessThanTotal = hypotheticalTotal <= totalBudget
     if (isDecreasing || isLessThanTotal) { 
-    console.log('setting', id, value)
       setAllos({
         ...allos, 
         [id]: value
@@ -67,15 +66,17 @@ function App() {
   return (
     <div className="App tac">
       <div className='flex jcc aife mt30'>
-        <span className='fs1'> {Math.round( total * 10) / 10}</span>
-        <span>/{totalBudget}</span>
+        <span>
+          you have 
+          <span className='fs1'>{total}</span>
+          voice credits
+          <div> to vote with on the following snacks </div>
+        </span>
       </div>
       <p className='fs16 mb30'>budget wisely my friend 🤔</p>
       <div className='flex'>
       </div>
       {snacks.map(snack => <div key={snack.id} className='w300 tal'>
-        {/* <div className='w50 h50 rounded flexCenter mr10'>{allos[snack.id] || 0}</div> */}
-        {/* <div className='w300'> */}
           <Typography>{snack.title}</Typography>
           <Slider
             id={snack.id}
