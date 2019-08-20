@@ -21,7 +21,6 @@ if (!uid) localStorage.setItem('hasa_uid', generateUID())
 
 
 function App() {
-  const [budget, setBudget] = useState();
   const [snacks, setSnacks] = useState([]);
   const [snackMessage, setMessage] = useState(null)
   const [allos, setAllos] = useState({})
@@ -33,12 +32,11 @@ function App() {
     }).firstPage(function(err, records) {
       if (err) { console.error(err); return; }
       setSnacks(mapAirtableValues(records))
-      setBudget(records.length)
     });
   }
 
   const onSubmit = () => {
-    base('votes').create({id: uid, ...allos}, function(err, record) {
+    base('votes').create({uid, ...allos}, function(err, record) {
       if (err) {
         console.error(err);
         return;
@@ -66,7 +64,6 @@ function App() {
       })
     }
   }
-  console.log('allocations', allos)
   return (
     <div className="App tac">
       <div className='flex jcc aife mt30'>
@@ -77,17 +74,20 @@ function App() {
       <div className='flex'>
       </div>
       {snacks.map(snack => <div key={snack.id} className='w300 tal'>
-        <div>{allos[snack.id]}</div>
-        <Typography>{snack.title}</Typography>
-        <Slider
-          id={snack.id}
-          name={snack.id}
-          max={totalBudget}
-          step={1}
-          value={allos[snack.id]}
-          onChange={(e, value) => handleChange({ id: snack.id, value })}
-          getAriaValueText={() => 'input'}
-        /> 
+        {/* <div className='w50 h50 rounded flexCenter mr10'>{allos[snack.id] || 0}</div> */}
+        {/* <div className='w300'> */}
+          <Typography>{snack.title}</Typography>
+          <Slider
+            id={snack.id}
+            name={snack.id}
+            max={totalBudget}
+            step={1}
+            valueLabelDisplay='auto'
+            value={allos[snack.id] || 0}
+            onChange={(e, value) => handleChange({ id: snack.id, value })}
+            getAriaValueText={() => 'input'}
+          /> 
+        {/* </div> */}
       </div> )}
       <div className='mt30 mb50 w100p'>
         <Button 

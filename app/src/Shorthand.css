@@ -12,6 +12,7 @@
 
 .txtWhite { color: #fff;}
 .bgBlue { background-color: #0b3d91; }
+.bgLightBlue { background-color: #0d4; }
 .txtBlue { color: #0b3d91; }
 .txtGray { color: gray; }
 .ellipsis {
@@ -47,9 +48,11 @@
 .mr10 { margin-right: 10px; }
 .mr20 { margin-right: 20px; }
 .mr30 { margin-right: 30px; }
-
+.rounded { border-radius: 3px; }
 .w100p { width: 100%; }
 .w50p { width: 50%; }
+.h50 { height: 50px; }
+.w50 { width: 50px; }
 .w100 { width: 100px; }
 .w200 { width: 200px; }
 .w300 { width: 300px; }
