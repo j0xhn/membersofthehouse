@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 import './App.css';
 import './Shorthand.css';
 import Slider from '@material-ui/core/Slider';
+import offlineData from './static/data/mappedSnackList'
 import Typography from '@material-ui/core/Typography';
 import Snackbar from '@material-ui/core/Snackbar';
 import terms from './terms'
@@ -24,14 +25,22 @@ function App() {
   const [snacks, setSnacks] = useState([]);
   const [snackMessage, setMessage] = useState(null)
   const [allos, setAllos] = useState({})
-  const totalBudget = snacks.length
+  const votesPerSnack = 4
+  const defaultVotesPerSnack = 2
+  const totalBudget = snacks.length * votesPerSnack
 
   if (!snacks.length){
     base('snacks').select({
       view: 'Grid view'
     }).firstPage(function(err, records) {
-      if (err) { console.error(err); return; }
-      setSnacks(mapAirtableValues(records))
+      const mappedData = err 
+        ? offlineData
+        : mapAirtableValues(records)
+      setSnacks(mappedData)
+      setAllos(mappedData.reduce((acc,snack)=>({
+        ...acc, 
+        [snack.id]: defaultVotesPerSnack})
+      ,{}))
     });
   }
 
@@ -63,17 +72,24 @@ function App() {
       })
     }
   }
+  const remainingBalance = totalBudget - total
   return (
     <div className="App tac">
       <div className='flex jcc aife mt30'>
         <span>
           you have 
-          <span className='fs1'>{total}</span>
+          {remainingBalance 
+            ? <span className='fs1'>{remainingBalance}</span>
+            : ' used all your '
+          }
           voice credits
-          <div> to vote with on the following snacks </div>
+          {!!remainingBalance &&  <div> to vote with on the following snacks </div>}
         </span>
       </div>
-      <p className='fs16 mb30'>budget wisely my friend 🤔</p>
+      {remainingBalance
+        ? <p className='fs16 mb30'>budget wisely my friend 🤔</p>
+        : <p className='fs16 mb30'>thank you 🥳</p>
+      }
       <div className='flex'>
       </div>
       {snacks.map(snack => <div key={snack.id} className='w300 tal'>
