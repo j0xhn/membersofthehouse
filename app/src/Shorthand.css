@@ -5,6 +5,10 @@
 .aic { align-items: center;}
 .aife { align-items: flex-end;}
 .flexCenter { display: flex; justify-content: center; align-items: center;}
+.block { display: block; }
+.pageContainer {
+  padding: 15px;
+}
 
 .tac { text-align: center; }
 .tal { text-align: left; }
@@ -38,6 +42,8 @@
 .pt10 { padding-top: 10px; }
 .pt20 { padding-top: 20px; }
 .pt30 { padding-top: 30px; }
+.pt40 { padding-top: 40px; }
+.pt50 { padding-top: 50px; }
 .m0a { margin: 0 auto; }
 .m10 { margin: 10px; }
 .m20 { margin: 20px; }
@@ -45,6 +51,8 @@
 .mt10 { margin-top: 10px; }
 .mt20 { margin-top: 20px; }
 .mt30 { margin-top: 30px; }
+.mt40 { margin-top: 40px; }
+.mt50 { margin-top: 50px; }
 .mr10 { margin-right: 10px; }
 .mr20 { margin-right: 20px; }
 .mr30 { margin-right: 30px; }
@@ -71,6 +79,7 @@
 .br50 { border-radius: 50%; }
 
 .fs1 { font-size: 100px; line-height: 80px; }
+.fs2 { font-size: 50px; }
 .fs10 { font-size: 10px; }
 .fs12 { font-size: 12px; }
 .fs14 { font-size: 14px; }

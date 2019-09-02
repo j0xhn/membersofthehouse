@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
-import React, {useState} from 'react';
+import React, {useState, createContext} from 'react';
 import './App.css';
 import './Shorthand.css';
 import Slider from '@material-ui/core/Slider';
@@ -8,26 +8,37 @@ import Typography from '@material-ui/core/Typography';
 import Snackbar from '@material-ui/core/Snackbar';
 import terms from './terms'
 import Button from '@material-ui/core/Button';
-import {generateUID, mapAirtableValues} from './utils'
-import Airtable from 'airtable'
+import Thankyou from "./routes/thankyou";
+import {shuffle, generateUID, mapAirtableValues} from './utils'
+import base from './airtable'
 
 /* 
 *
 * INITIAL SETUP
 *
 */
-const base = new Airtable({apiKey: process.env.REACT_APP_AIRTABLE_KEY}).base('appVnznDLeNrQGLnE');
-const uid = localStorage.getItem('hasa_uid')
-if (!uid) localStorage.setItem('hasa_uid', generateUID())
+let uid = localStorage.getItem('hasa_uid')
+const lastVoteTimestamp = localStorage.getItem('hasa_lastVoteTimestamp')
+if (!uid) {
+  uid = generateUID()
+  localStorage.setItem('hasa_uid', uid)
+}
+export const UserContext = createContext({uid, lastVoteTimestamp});
 
 
 function App() {
   const [snacks, setSnacks] = useState([]);
   const [snackMessage, setMessage] = useState(null)
   const [allos, setAllos] = useState({})
+  const [userData, setUserData] = useState({uid, lastVoteTimestamp})
   const votesPerSnack = 4
   const defaultVotesPerSnack = 2
   const totalBudget = snacks.length * votesPerSnack
+  const handleSuccess = () => {
+    const lastVoteTimestamp = Date.now()
+    localStorage.setItem('hasa_lastVoteTimestamp', lastVoteTimestamp)
+    setUserData({uid, lastVoteTimestamp, voted: true})
+  }
 
   if (!snacks.length){
     base('snacks').select({
@@ -36,7 +47,7 @@ function App() {
       const mappedData = err 
         ? offlineData
         : mapAirtableValues(records)
-      setSnacks(mappedData)
+      setSnacks(shuffle(mappedData))
       setAllos(mappedData.reduce((acc,snack)=>({
         ...acc, 
         [snack.id]: defaultVotesPerSnack})
@@ -47,10 +58,12 @@ function App() {
   const onSubmit = () => {
     base('votes').create({uid, ...allos}, function(err, record) {
       if (err) {
-        console.error(err);
-        return;
+        setMessage(err)
       } else {
         setMessage('Save Successfull')
+        setTimeout(() => {
+         handleSuccess() 
+        }, 2000);
       }
     });
   }
@@ -73,8 +86,14 @@ function App() {
     }
   }
   const remainingBalance = totalBudget - total
-  return (
-    <div className="App tac">
+  // const oneday = 60 * 60 * 24 * 1000
+  // const hasVotedInPast24Hours = (Date.now() - oneday < userData.lastVoteTimestamp)
+  // console.log('hasVotedInPast24Hours: ', hasVotedInPast24Hours);
+    return (
+    <UserContext.Provider value={userData}>
+    {userData.voted 
+    ? <Thankyou {...userData} /> 
+    : <div className="App tac">
       <div className='flex jcc aife mt30'>
         <span>
           you have 
@@ -126,6 +145,8 @@ function App() {
         message={<span>{snackMessage}</span>}
       />
     </div>
+    }
+</UserContext.Provider>
   );
 }
 
