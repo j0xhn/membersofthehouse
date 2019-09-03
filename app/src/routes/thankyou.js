@@ -4,33 +4,30 @@ import TextField from '@material-ui/core/TextField';
 import base from '../airtable'
 import {useStateValue} from '../stores/global'
 export default ({lastVoteTimestamp}) => {
-  const [message, setMessage] = useState(null)
+  const [feedbackSent, setFeedbackSent] = useState(null)
   const feedbackEl = useRef(null)
   const [{user}] = useStateValue()
-  const handleSuccess=() => {
-    console.log('success')
-  }
   const onSubmit = () => {
     base('feedback').create({
       uid: user.uid,
       feedback: feedbackEl.current.value
     }, function(err, record) {
       if (err) {
-        setMessage(err)
+        setFeedbackSent(false)
       } else {
-        setMessage('This form will reset in 24 hours and you can vote again.  Happy snacking here at Wayfair :)')
-        setTimeout(() => {
-         handleSuccess() 
-        }, 2000);
+        setFeedbackSent(true)
       }
     });
   }
   return <div className="pageContainer tac pt50">
     <div className='fs2 mb20'>Thank you!</div>
-      {message 
-      ? <div className='mw400 m0a'>{message}</div>
-      :  <>
-        <div className='mb20'> Leave any other feedback below. </div>
+      <div className='mw400 m0a'>
+        This form will reset in 24 hours and you can vote again.  Leave any other feedback you'd like below.  
+        <div className='mb20'> Happy snacking here at Wayfair :) </div>
+      </div>
+      {feedbackSent 
+        ? <span>Feedback Recieved</span>
+        : <>
         <div>
         <TextField
           id="outlined-multiline-static"
@@ -51,7 +48,6 @@ export default ({lastVoteTimestamp}) => {
           >
             Send
           </Button>
-        </>
-      }
-    </div>
+        </>}
+      </div>
 }

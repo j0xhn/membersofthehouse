@@ -17,7 +17,6 @@ function App() {
   const [snacks, setSnacks] = useState([]);
   const [state, dispatch] = useGlobalState()
   const {user} = state
-  console.log('user: ', user, state);
   const [snackMessage, setMessage] = useState(null)
   const [allos, setAllos] = useState({})
   const votesPerSnack = 4
@@ -76,10 +75,11 @@ function App() {
     }
   }
   const remainingBalance = totalBudget - total
-  // const oneday = 60 * 60 * 24 * 1000
-  // const hasVotedInPast24Hours = (Date.now() - oneday < userData.lastVoteTimestamp)
-  // console.log('hasVotedInPast24Hours: ', hasVotedInPast24Hours);
-    return user.voted 
+  const oneday = 60 * 60 * 24 * 1000
+  console.log(user.lastVoteTimestamp - (Date.now() - oneday))
+  const dayInPast = Date.now() - oneday
+  const hasVotedInPast24Hours = (dayInPast < user.lastVoteTimestamp)
+    return user.voted || hasVotedInPast24Hours
     ? <Thankyou {...user} /> 
     : <div className="App tac">
       <div className='flex jcc aife mt30'>
