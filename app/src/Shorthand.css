@@ -67,6 +67,7 @@
 .w200 { width: 200px; }
 .w300 { width: 300px; }
 .w400 { width: 400px; }
+.mw400 { max-width: 400px; }
 .w500 { width: 500px; }
 .h100 { height: 100px; }
 .h200 { height: 200px; }

@@ -1,24 +1,24 @@
-import React, { useState, useContext, useRef} from 'react'
+import React, { useState, useRef} from 'react'
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import base from '../airtable'
-import { UserContext } from "../App";
+import {useStateValue} from '../stores/global'
 export default ({lastVoteTimestamp}) => {
   const [message, setMessage] = useState(null)
   const feedbackEl = useRef(null)
-  const userData = useContext(UserContext)
+  const [{user}] = useStateValue()
   const handleSuccess=() => {
     console.log('success')
   }
   const onSubmit = () => {
     base('feedback').create({
-      uid: userData.uid,
+      uid: user.uid,
       feedback: feedbackEl.current.value
     }, function(err, record) {
       if (err) {
         setMessage(err)
       } else {
-        setMessage('This form will reset in 24 hours and you can vote again.  Thank you for participating and happy snacking here at Wayfair :)')
+        setMessage('This form will reset in 24 hours and you can vote again.  Happy snacking here at Wayfair :)')
         setTimeout(() => {
          handleSuccess() 
         }, 2000);
@@ -26,12 +26,9 @@ export default ({lastVoteTimestamp}) => {
     });
   }
   return <div className="pageContainer tac pt50">
-    {/* <div>
-      <Check className='fs1' />
-    </div> */}
     <div className='fs2 mb20'>Thank you!</div>
       {message 
-      ? <span className='w300'>{message}</span>
+      ? <div className='mw400 m0a'>{message}</div>
       :  <>
         <div className='mb20'> Leave any other feedback below. </div>
         <div>
