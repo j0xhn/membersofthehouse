@@ -14,18 +14,17 @@ import base from '../airtable'
 import {useGlobalState} from '../stores/global'
 
 function App() {
-  const [snacks, setSnacks] = useState([]);
-  const [state, dispatch] = useGlobalState()
-  const {user} = state
+  const [snacks, setSnacks] = useState([])
+  const [{user}, dispatch] = useGlobalState()
   const [snackMessage, setMessage] = useState(null)
   const [allos, setAllos] = useState({})
   const votesPerSnack = 4
   const defaultVotesPerSnack = 2
   const totalBudget = snacks.length * votesPerSnack
+  
   const handleSuccess = () => {
     const lastVoteTimestamp = Date.now()
     localStorage.setItem('hasa_lastVoteTimestamp', lastVoteTimestamp)
-    console.log('dispatch', dispatch)
     dispatch({ type: 'user.set', payload: {lastVoteTimestamp, voted: true}})
   }
 
@@ -76,7 +75,6 @@ function App() {
   }
   const remainingBalance = totalBudget - total
   const oneday = 60 * 60 * 24 * 1000
-  console.log(user.lastVoteTimestamp - (Date.now() - oneday))
   const dayInPast = Date.now() - oneday
   const hasVotedInPast24Hours = (dayInPast < user.lastVoteTimestamp)
     return user.voted || hasVotedInPast24Hours
@@ -97,8 +95,7 @@ function App() {
         ? <p className='fs16 mb30'>budget wisely my friend 🤔</p>
         : <p className='fs16 mb30'>thank you 🥳</p>
       }
-      <div className='flex'>
-      </div>
+      <div className='flex aic'>
       {snacks.map(snack => <div key={snack.id} className='w300 tal'>
           <Typography>{snack.title}</Typography>
           <Slider
@@ -111,8 +108,8 @@ function App() {
             onChange={(e, value) => handleChange({ id: snack.id, value })}
             getAriaValueText={() => 'input'}
           /> 
-        {/* </div> */}
       </div> )}
+        </div>
       <div className='mt30 mb50 w100p'>
         <Button 
           variant="contained" 

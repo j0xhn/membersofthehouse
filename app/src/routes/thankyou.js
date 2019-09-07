@@ -2,11 +2,11 @@ import React, { useState, useRef} from 'react'
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import base from '../airtable'
-import {useStateValue} from '../stores/global'
+import {useGlobalState} from '../stores/global'
 export default ({lastVoteTimestamp}) => {
   const [feedbackSent, setFeedbackSent] = useState(null)
   const feedbackEl = useRef(null)
-  const [{user}] = useStateValue()
+  const [{user}] = useGlobalState()
   const onSubmit = () => {
     base('feedback').create({
       uid: user.uid,
