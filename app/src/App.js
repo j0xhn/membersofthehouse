@@ -6,14 +6,17 @@ import './Shorthand.css';
 import Voting from './routes/voting'
 import Landing from './routes/landing'
 import GlobalWrapper from './stores/global'
+import Toast from './components/Toast'
 
 function App() {
     return (
     <GlobalWrapper>
-      <Router>
-        <Route exact path="/" component={Landing} />
-        <Route path="/:id" component={Voting} />
-      </Router>
+      <Toast>
+        <Router>
+          <Route exact path="/" component={Landing} />
+          <Route path="/:id" component={Voting} />
+        </Router>
+      </Toast>
     </GlobalWrapper>
   );
 }

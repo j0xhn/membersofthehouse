@@ -1,23 +1,23 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import '../App.css';
 import '../Shorthand.css';
 import Slider from '@material-ui/core/Slider';
 import offlineData from '../static/data/mappedSnackList'
 import Typography from '@material-ui/core/Typography';
-import Snackbar from '@material-ui/core/Snackbar';
 import terms from '../terms'
 import Button from '@material-ui/core/Button';
 import {shuffle, mapAirtableValues} from '../utils'
 import Thankyou from '../routes/thankyou'
 import base from '../airtable'
+import {ToastContext} from '../components'
 import {useGlobalState} from '../stores/global'
 
 function App() {
   const [snacks, setSnacks] = useState([])
   const [{user}, dispatch] = useGlobalState()
-  const [snackMessage, setMessage] = useState(null)
   const [allos, setAllos] = useState({})
+  const toastContext = useContext(ToastContext)
   const votesPerSnack = 4
   const defaultVotesPerSnack = 2
   const totalBudget = snacks.length * votesPerSnack
@@ -25,7 +25,7 @@ function App() {
   const handleSuccess = () => {
     const lastVoteTimestamp = Date.now()
     localStorage.setItem('hasa_lastVoteTimestamp', lastVoteTimestamp)
-    dispatch({ type: 'user.set', payload: {lastVoteTimestamp, voted: true}})
+    dispatch({ type: 'user.update', payload: {lastVoteTimestamp, voted: true}})
   }
 
   if (!snacks.length){
@@ -46,12 +46,9 @@ function App() {
   const onSubmit = () => {
     base('votes').create({uid: user.uid, ...allos}, function(err, record) {
       if (err) {
-        setMessage(err)
+        toastContext.set({message: err.toString()})
       } else {
-        setMessage('Save Successfull')
-        setTimeout(() => {
          handleSuccess() 
-        }, 2000);
       }
     });
   }
@@ -59,7 +56,7 @@ function App() {
   const total = Object.values(allos)
     .reduce((acc,allo) => Number(acc) + Number(allo), 0)
 
-  const showTerms = () => setMessage(terms) 
+  const showTerms = () => toastContext.set({message: terms}) 
 
   const handleChange = ({id, value}) => {
     const currentAllo = Number(allos[id]) || 0
@@ -83,19 +80,16 @@ function App() {
       <div className='flex jcc aife mt30'>
         <span>
           you have 
-          {remainingBalance 
-            ? <span className='fs1'>{remainingBalance}</span>
-            : ' used all your '
-          }
+            <span className='fs1'>{remainingBalance}</span>
           voice credits
-          {!!remainingBalance &&  <div> to vote with on the following snacks </div>}
+          <div> to vote with on the following snacks </div>
         </span>
       </div>
       {remainingBalance
-        ? <p className='fs16 mb30'>budget wisely my friend 🤔</p>
-        : <p className='fs16 mb30'>thank you 🥳</p>
+        ? <p className='fs16 mb30'>🤔 budget wisely my friend 🤔</p>
+        : <p className='fs16 mb30'>🥳 thank you 🥳</p>
       }
-      <div className='flex aic'>
+      <div className='flex aic column'>
       {snacks.map(snack => <div key={snack.id} className='w300 tal'>
           <Typography>{snack.title}</Typography>
           <Slider
@@ -122,13 +116,6 @@ function App() {
       <small className='fs10 w300 txtGray'>This app is an expirement and may or <strong className='underline'>may not</strong> impact snack choices.  Thank you for your help in making Wayfair a great place to work and snack </small>
       <p className='mb20'>🙇‍♂️</p>
       <div onClick={showTerms} className='fs10 w300 txtBlue pointer underline mb50'>terms and conditions</div>
-      <Snackbar
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-        open={!!snackMessage}
-        onClose={()=> setMessage(null)}
-        ContentProps={{ 'aria-describedby': 'message-id', }}
-        message={<span>{snackMessage}</span>}
-      />
     </div>
 }
 

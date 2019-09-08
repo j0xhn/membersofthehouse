@@ -1,8 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
+const width= '320px'
 const Smartphone = styled.div`
   position: relative;
-  width: 360px;
+  width: ${width};
   height: 640px;
   margin: auto;
   border: 16px black solid;
@@ -39,7 +40,7 @@ const Smartphone = styled.div`
 
 /* The screen (or content) of the device */
 .content {
-  width: 360px;
+  width: ${width};
   height: 640px;
 }
 `

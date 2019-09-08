@@ -1,25 +1,27 @@
-import React from 'react'
+import React, {useRef, useState, useContext} from 'react'
 import styled from 'styled-components'
-import Phone from '../components/phone'
+import Phone from '../components/Phone'
 import ExampleApp from '../static/exampleApp'
+import {ToastContext} from '../components'
+import base from '../airtable'
 import {colors} from '../static/theme'
 import IconButton from '@material-ui/core/IconButton';
-import PlayArrow from '@material-ui/icons/PlayArrow'
+import Button from '@material-ui/core/Button';
+import { PlayArrow } from '@material-ui/icons'
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import FormControl from '@material-ui/core/FormControl';
-
 
 const Highlight = styled.span`
   display: inline-block;
   position: relative;
   ::after{
     content: '';
-    width: 95%;
-    height: 50%;
-    top: 50%;
-    left: 10%;
+    width: ${`calc(100% - 3px )`};
+    height: 40%;
+    top: 60%;
+    left: 5px;
     right: 0;
     position: absolute;
     opacity: .3;
@@ -34,46 +36,57 @@ const The = styled.div`
   transform: rotate(-10deg); 
   font-weight: 600;
 `
-const handleSubscribe = () => {
-  console.log('subscribe')
-}
-export default () => <div>
+
+const Section = styled.div`
+  margin-top: 50px;
+  padding: 50px;
+  background-color: ${({color})=> color};
+`
+export default () => {
+  const betaInput = useRef()
+  const workplaceInput = useRef()
+  const toastContext = useContext(ToastContext)
+  const [showBeta, setShowBeta] = useState()
+  const emailSubmit = (input) => {
+    const anchorOrigin = input.current.id === 'beta' 
+      ? { vertical: 'top', horizontal: 'center' }
+      : undefined
+    base('emails').create({
+      email: input.current.value, 
+      type: input.current.id}, 
+      function(err, record) {
+        if (err) {
+          toastContext.set({message: err.toString(), anchorOrigin})
+        } else {
+          toastContext.set({
+            message: 'Success!',
+            anchorOrigin
+          })
+          input.current.value = ''
+          setShowBeta(false)
+        }
+    });
+  }
+return <div>
   <div className='tac mt50'>
-    <div className='p50 relative pageContainer'>
+    <Section>
+    <div className='relative mb50'>
       <div className='fs2 bold'> Hack</div>
       <The>- the -</The>
       <div className='fs2 bold'>Snack</div>
     </div>
-    <div className='mt50 bgLightBlue p50'>
-      <div className='fs20'>Giving <Highlight>feedback</Highlight> is boring.</div>
-      <div className='fs20 mb20'>Voting on snacks is <Highlight>fun</Highlight>.</div>
-      <div className='fs20'>We bridge the gap. </div>
-      <span role='img' aria-label='happy' className='mt20 fs2'>🥳</span>
-    </div>
-    <div className='mt50 p50'>
-      <Phone>
-        <ExampleApp />
-      </Phone>
-    </div>
-    <div className='mt50 p50'>
-      <div className='mb20'>
-        Want your workplace to adopt this model for choosing snacks?
-      </div>
-      {/* <div className='mb20'>
-        Interested in crypto currency and how to transition this into a DAO
-        that will one day replace our govt's tax system when the USD fails and
-        we need a peaceful way of distributing collective funds without central 
-        actors prone to oppression and corruption? 
-      </div> */}
-    <FormControl>
+    <div className='flex column aic m0a'>
+    {showBeta 
+      ? <FormControl>
       <InputLabel htmlFor="adornment-password">email</InputLabel>
       <Input
-        id="adornment-password"
+        id="beta"
+        inputRef={betaInput}
         endAdornment={
           <InputAdornment position="end">
             <IconButton
               aria-label="toggle password visibility"
-              onClick={handleSubscribe}
+              onClick={() => emailSubmit(betaInput)}
             >
               <PlayArrow />
             </IconButton>
@@ -81,6 +94,53 @@ export default () => <div>
           }
         />
       </FormControl>
-  </div>
+      : <Button 
+          color="primary" 
+          variant='contained' 
+          onClick={()=>setShowBeta(true)} 
+        >Join Free Beta</Button>  
+    }
+    </div>
+    </Section>
+    <Section color={colors.lightBlue}>
+      <div className='fs20'>Giving <Highlight>feedback</Highlight> can be boring.</div>
+      <div className='fs20 mb20'>Voting on snacks is <Highlight>fun</Highlight>.</div>
+      <div className='fs20 mb10'><Highlight>Feed your culture</Highlight>.</div>
+      <span role='img' aria-label='happy' className='fs3 mt20'>🍌🥳🌮</span>
+    </Section>
+    <div className='pt50 pb50'>
+      <Phone>
+        <ExampleApp />
+      </Phone>
+    </div>
+    <Section color={colors.lightYellow}>
+      <div className='mb20'>
+        Want <Highlight>your workplace</Highlight> to use this app?
+      </div>
+    <FormControl>
+      <InputLabel htmlFor="adornment-password">email</InputLabel>
+      <Input
+        id="workplace"
+        inputRef={workplaceInput}
+        endAdornment={
+          <InputAdornment position="end">
+            <IconButton
+              aria-label="toggle password visibility"
+              onClick={()=>emailSubmit(workplaceInput)}
+            >
+              <PlayArrow />
+            </IconButton>
+          </InputAdornment>
+          }
+        />
+      </FormControl>
+  </Section>
+  {/* <Section>
+    <div className='fs3 bold'>Features</div>
+    <div>Anonymous</div>
+    <div>Delivery</div>
+    <div>Data</div>
+  </Section> */}
   </div>
 </div>
+}

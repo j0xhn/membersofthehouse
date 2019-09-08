@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 import React, {useState} from 'react';
+import { Check } from '@material-ui/icons'
 import TextField from '@material-ui/core/TextField';
 import Slider from '@material-ui/core/Slider';
 import _offlineData from '../static/data/mappedSnackList'
@@ -38,9 +39,11 @@ function App() {
   }
   const remainingBalance = totalBudget - total
     return sent
-    ? <div> 
-      sent
-      <div onClick={toggleSent}>back</div>
+    ? <div className='flexCenter column h100p'> 
+        <div className='fs1 txtGreen'>
+          <Check style={{fontSize: 100 }} /> 
+        </div>
+        <div onClick={toggleSent} className='txtBlue underline pointer'>back to example</div>
       </div> 
     : <div className="tac">
       <div className='flex jcc aife mt30'>
@@ -52,7 +55,7 @@ function App() {
         </span>
       </div>
       {remainingBalance
-        ? <p className='fs16 mb30'>budget wisely my friend 🤔</p>
+        ? <p className='fs16 mb30'>🤔 budget wisely my friend 🤔</p>
         : <p className='fs16 mb30'>thank you 🥳</p>
       }
       <div className='flex aic column'>

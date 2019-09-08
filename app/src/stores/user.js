@@ -13,7 +13,6 @@ export const userInitialState = {
   }
 };
 export default (state = userInitialState, action) => {
-  console.log('ur: action', action)
   switch (action.type) {
     case 'some_custom_action':
       return {
