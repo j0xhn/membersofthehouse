@@ -1,6 +1,4 @@
-<img src="./images/logo_400.png" width="200"/>
-
-**Hack the Snack**
+## 🍌 Hack the Snack  🌮
 
 
 Pushing forward a healthy workplace via the power of culture and voting.  MVP manifests itself as a tool for giving feedback to Wayfair, starting with general feedback near snack walls but leads to automating all kinds of decisions through the org.
