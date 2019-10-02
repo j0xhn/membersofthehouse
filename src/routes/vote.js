@@ -1,5 +1,7 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 import React, {useState, useContext} from 'react';
+import { withRouter } from "react-router-dom";
+import Airtable from 'airtable'
 import '../App.css';
 import '../Shorthand.css';
 import Slider from '@material-ui/core/Slider';
@@ -7,13 +9,13 @@ import offlineData from '../static/data/mappedSnackList'
 import Typography from '@material-ui/core/Typography';
 import terms from '../terms'
 import Button from '@material-ui/core/Button';
+import {chunk} from 'lodash'
 import {shuffle, mapAirtableValues} from '../utils'
 import Thankyou from '../routes/thankyou'
-import base from '../airtable'
 import {ToastContext} from '../components'
 import {useGlobalState} from '../stores/global'
 
-function App() {
+function Vote({match}) {
   const [snacks, setSnacks] = useState([])
   const [{user}, dispatch] = useGlobalState()
   const [allos, setAllos] = useState({})
@@ -21,7 +23,6 @@ function App() {
   const votesPerSnack = 4
   const defaultVotesPerSnack = 2
   const totalBudget = snacks.length * votesPerSnack
-  console.log('vote route')
   
   const handleSuccess = () => {
     const lastVoteTimestamp = Date.now()
@@ -30,6 +31,9 @@ function App() {
   }
 
   if (!snacks.length){
+    const base = new Airtable({
+      apiKey: process.env.REACT_APP_AIRTABLE_KEY
+    }).base(match.params.baseId)
     base('snacks').select({
       view: 'Grid view'
     }).firstPage(function(err, records) {
@@ -44,12 +48,58 @@ function App() {
     });
   }
 
+  // CATEGORY
+  const categories = snacks.reduce((acc,snack) => ({
+    ...acc,
+    [snack.category]: (acc[snack.category] || []).concat(snack)
+  }), {})
+  const categoryAllos = Object.entries(categories).reduce((acc, [category,snacks]) => {
+    const categoryTotal = snacks.reduce((acc, snack) => 
+      acc + Number(allos[snack.id] || 0)
+    ,0)
+    return {
+      ...acc,
+      [category]: categoryTotal
+    }
+  }, {})
+  const handleCategoryChange = ({category,value}) => {
+    console.log('categoryValue',value)
+    const currentAllo = Number(categoryAllos[category]) || 0
+    const hypotheticalTotal = total - currentAllo + value
+    const isDecreasing = value < currentAllo
+    const isLessThanTotal = hypotheticalTotal <= totalBudget
+    if (isDecreasing || isLessThanTotal) { 
+      console.log('category', categories[category])
+      const snacksInCategory = categories[category]
+      const spreadValue = currentAllo - value / snacksInCategory.length
+      console.log('spreadValue: ', spreadValue);
+
+      // setAllos({
+      //   ...allos, 
+      //   [id]: value
+      // })
+    }
+  }
+  // CATEGORY END
+  console.log('categoryAllos: ', categoryAllos);
+
   const onSubmit = () => {
-    base('votes').create({uid: user.uid, ...allos}, function(err, record) {
+    const base = new Airtable({
+      apiKey: process.env.REACT_APP_AIRTABLE_KEY
+    }).base(match.params.baseId) 
+    base('votes').create({uid: user.uid, votes: JSON.stringify(allos)}, function(err, record) {
       if (err) {
         toastContext.set({message: err.toString()})
       } else {
-         handleSuccess() 
+        const snacksWithNewTotals = snacks.map(snack => ({
+          id: snack.id,
+          fields: {
+            votes: (snack.votes || 0) + allos[snack.id]
+          }
+        }))
+        chunk(snacksWithNewTotals, 10)
+          .forEach(chunk => { base('snacks').update(chunk) })
+        handleSuccess() 
       }
     });
   }
@@ -58,7 +108,6 @@ function App() {
     .reduce((acc,allo) => Number(acc) + Number(allo), 0)
 
   const showTerms = () => toastContext.set({message: terms}) 
-
   const handleChange = ({id, value}) => {
     const currentAllo = Number(allos[id]) || 0
     const hypotheticalTotal = total - currentAllo + value
@@ -91,7 +140,7 @@ function App() {
         : <p className='fs16 mb30'>🥳 thank you 🥳</p>
       }
       <div className='flex aic column'>
-      {snacks.map(snack => <div key={snack.id} className='w300 tal'>
+      {/* {snacks.map(snack => <div key={snack.id} className='w300 tal'>
           <Typography>{snack.title}</Typography>
           <Slider
             id={snack.id}
@@ -103,7 +152,21 @@ function App() {
             onChange={(e, value) => handleChange({ id: snack.id, value })}
             getAriaValueText={() => 'input'}
           /> 
-      </div> )}
+      </div> )} */}
+      {Object.entries(categories).map(([category, snacks]) => <div key={category} className='w300 tal mb20'>
+          <Typography variant='h6'>{category}</Typography>
+          <Typography variant='body2' className='fs-10 txtGray'>{snacks.map((snack, i)=> `${i !== 0 ? ',' : ''} ${snack.title}`)}</Typography>
+          <Slider
+            id={category}
+            name={category}
+            max={totalBudget}
+            step={1}
+            valueLabelDisplay='auto'
+            value={categoryAllos[category] || 0}
+            onChange={(e, value) => handleCategoryChange({ category, value })}
+            getAriaValueText={() => 'input'}
+          /> 
+      </div>)}
         </div>
       <div className='mt30 mb50 w100p'>
         <Button 
@@ -120,4 +183,4 @@ function App() {
     </div>
 }
 
-export default App;
+export default withRouter(Vote);

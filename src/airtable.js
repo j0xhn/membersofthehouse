@@ -1,10 +1,26 @@
+import { useState, useEffect } from 'react';
 import Airtable from 'airtable'
-// const appId = window.location.pathname.length > 1 
-//   ? window.location.pathname.split('/')[1]
-//   : 'appDnaTYaw2E07vY8' // production for email signups
-// console.log('loading', appId)
-const base = new Airtable({
-  apiKey: process.env.REACT_APP_AIRTABLE_KEY
-}).base('appDnaTYaw2E07vY8');
+import { withRouter } from 'react-router-dom'
 
-export default base
+// function useBase({ match }) {
+//   const [base, setBase] = useState({});
+
+//   useEffect(() => {
+//     setBase(new Airtable({
+//       apiKey: process.env.REACT_APP_AIRTABLE_KEY
+//     }).base(match.params.baseId))
+//   }, [match.params.baseId]);
+
+//   return baseZ
+// }
+
+// export default withRouter(useBase)
+
+export const getBase = (baseId = 'appDnaTYaw2E07vY8') => {
+  console.log('baseId', baseId)
+  return new Airtable({
+    apiKey: process.env.REACT_APP_AIRTABLE_KEY
+  }).base(baseId);
+}
+
+export default getBase

@@ -1,13 +1,19 @@
 import React, { useState, useRef} from 'react'
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import base from '../airtable'
+import Airtable from 'airtable'
 import {useGlobalState} from '../stores/global'
-export default ({lastVoteTimestamp}) => {
+import { withRouter } from "react-router-dom";
+
+export default withRouter(({lastVoteTimestamp, match}) => {
   const [feedbackSent, setFeedbackSent] = useState(null)
   const feedbackEl = useRef(null)
   const [{user}] = useGlobalState()
   const onSubmit = () => {
+    const base = new Airtable({
+      apiKey: process.env.REACT_APP_AIRTABLE_KEY
+    }).base(match.params.baseId)
+    
     base('feedback').create({
       uid: user.uid,
       feedback: feedbackEl.current.value
@@ -50,4 +56,4 @@ export default ({lastVoteTimestamp}) => {
           </Button>
         </>}
       </div>
-}
+})

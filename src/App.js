@@ -13,7 +13,7 @@ function App() {
     <GlobalWrapper>
       <Toast>
         <Router>
-          <Route path="/vote/:id" component={Vote} />
+          <Route path="/vote/:baseId" component={Vote} />
           <Route exact path="/" component={Landing} />
         </Router>
       </Toast>
