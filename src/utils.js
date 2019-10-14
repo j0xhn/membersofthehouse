@@ -32,3 +32,16 @@ export function shuffle(array) {
 
   return array;
 }
+
+export const decimalIfExists = (n) => {
+  if (n - Math.floor(n) !== 0) {
+    const decimal = n.toFixed(1)
+    const isWhole = decimal % 1 === 0
+    const value = isWhole
+      ? Math.round(decimal)
+      : decimal
+    return Number(value)
+  } else {
+    return n
+  }
+}

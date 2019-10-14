@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import terms from '../terms'
 import Button from '@material-ui/core/Button';
 import {chunk} from 'lodash'
-import {shuffle, mapAirtableValues} from '../utils'
+import {shuffle, mapAirtableValues, decimalIfExists} from '../utils'
 import Thankyou from '../routes/thankyou'
 import {ToastContext} from '../components'
 import {useGlobalState} from '../stores/global'
@@ -63,25 +63,24 @@ function Vote({match}) {
     }
   }, {})
   const handleCategoryChange = ({category,value}) => {
-    console.log('categoryValue',value)
     const currentAllo = Number(categoryAllos[category]) || 0
     const hypotheticalTotal = total - currentAllo + value
     const isDecreasing = value < currentAllo
     const isLessThanTotal = hypotheticalTotal <= totalBudget
     if (isDecreasing || isLessThanTotal) { 
-      console.log('category', categories[category])
       const snacksInCategory = categories[category]
-      const spreadValue = currentAllo - value / snacksInCategory.length
-      console.log('spreadValue: ', spreadValue);
-
-      // setAllos({
-      //   ...allos, 
-      //   [id]: value
-      // })
+      const spreadValue = (value - currentAllo) / snacksInCategory.length
+      const newAllos = snacksInCategory.reduce((acc,snack) => ({
+        ...acc,
+        [snack.id]: allos[snack.id] + spreadValue
+      }),{})
+      setAllos({
+        ...allos, 
+        ...newAllos
+      })
     }
   }
   // CATEGORY END
-  console.log('categoryAllos: ', categoryAllos);
 
   const onSubmit = () => {
     const base = new Airtable({
@@ -120,7 +119,7 @@ function Vote({match}) {
       })
     }
   }
-  const remainingBalance = totalBudget - total
+  const remainingBalance = decimalIfExists(totalBudget - total)
   const oneday = 60 * 60 * 24 * 1000
   const dayInPast = Date.now() - oneday
   const hasVotedInPast24Hours = (dayInPast < user.lastVoteTimestamp)
@@ -162,7 +161,7 @@ function Vote({match}) {
             max={totalBudget}
             step={1}
             valueLabelDisplay='auto'
-            value={categoryAllos[category] || 0}
+            value={decimalIfExists(categoryAllos[category] || 0)}
             onChange={(e, value) => handleCategoryChange({ category, value })}
             getAriaValueText={() => 'input'}
           /> 

@@ -2,7 +2,7 @@ import React, {useRef, useState, useContext} from 'react'
 import styled from 'styled-components'
 import Phone from '../components/Phone'
 import ExampleApp from '../static/exampleApp'
-import {ToastContext} from '../components'
+import {ToastContext, Highlight} from '../components'
 import base from '../airtable'
 import {colors} from '../static/theme'
 import IconButton from '@material-ui/core/IconButton';
@@ -13,21 +13,6 @@ import InputLabel from '@material-ui/core/InputLabel';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import FormControl from '@material-ui/core/FormControl';
 
-const Highlight = styled.span`
-  display: inline-block;
-  position: relative;
-  ::after{
-    content: '';
-    width: ${`calc(100% - 3px )`};
-    height: 40%;
-    top: 60%;
-    left: 5px;
-    right: 0;
-    position: absolute;
-    opacity: .3;
-    background-color: ${colors.red}
-  }
-`
 const The = styled.div`
   position: absolute;
   left: 0;
@@ -76,7 +61,7 @@ return <div>
       <div className='fs2 bold'>Snack</div>
     </div>
     <div className='flex column aic m0a'>
-    {showBeta 
+    {/* {showBeta 
       ? <FormControl>
       <InputLabel htmlFor="adornment-password">email</InputLabel>
       <Input
@@ -99,7 +84,7 @@ return <div>
           variant='contained' 
           onClick={()=>setShowBeta(true)} 
         >Join Free Beta</Button>  
-    }
+    } */}
     </div>
     </Section>
     <Section color={colors.lightBlue}>
@@ -113,7 +98,7 @@ return <div>
         <ExampleApp />
       </Phone>
     </div>
-    <Section color={colors.lightYellow}>
+    {/* <Section color={colors.lightYellow}>
       <div className='mb20'>
         Want <Highlight>your workplace</Highlight> to use this app?
       </div>
@@ -134,7 +119,7 @@ return <div>
           }
         />
       </FormControl>
-  </Section>
+  </Section> */}
   {/* <Section>
     <div className='fs3 bold'>Features</div>
     <div>Anonymous</div>

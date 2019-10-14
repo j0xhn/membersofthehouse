@@ -1,5 +1,6 @@
 import React, { useState, useRef} from 'react'
 import Button from '@material-ui/core/Button';
+import {Highlight} from '../components'
 import TextField from '@material-ui/core/TextField';
 import Airtable from 'airtable'
 import {useGlobalState} from '../stores/global'
@@ -28,8 +29,8 @@ export default withRouter(({lastVoteTimestamp, match}) => {
   return <div className="pageContainer tac pt50">
     <div className='fs2 mb20'>Thank you!</div>
       <div className='mw400 m0a'>
-        This form will reset in 24 hours and you can vote again.  Leave any other feedback you'd like below.  
-        <div className='mb20'> Happy snacking here at Wayfair :) </div>
+        This form will reset in 24 hours and you can vote again.  <Highlight>Leave other feedback</Highlight> on how you'd like to see your workplace change below.  
+        <div className='mb20 mt20'> Happy snacking here at Wayfair :) </div>
       </div>
       {feedbackSent 
         ? <span>Feedback Recieved</span>
