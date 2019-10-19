@@ -6,7 +6,8 @@ import './Shorthand.css';
 import Vote from './routes/vote'
 import Landing from './routes/landing'
 import GlobalWrapper from './stores/global'
-import Toast from './components/Toast'
+import Toast from './components/Toast' 
+import 'semantic-ui-css/semantic.min.css' 
 
 function App() {
     return (

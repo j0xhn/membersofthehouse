@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 import React, {useState, useContext} from 'react';
 import { withRouter } from "react-router-dom";
-import Airtable from 'airtable'
+import { Popup, Icon } from 'semantic-ui-react';
+import Airtable from 'airtable';
 import '../App.css';
 import '../Shorthand.css';
 import Slider from '@material-ui/core/Slider';
@@ -129,7 +130,22 @@ function Vote({match}) {
       <div className='flex jcc aife mt30'>
         <span>
           you have 
-            <span className='fs1'>{remainingBalance}</span>
+            <span className='fs1 relative'>
+            {remainingBalance}
+            <Popup 
+              position='bottom right'
+              hideOnScroll
+              content={`
+                Each snack in the list gives you 4 votes for a total of ${totalBudget}.  
+                We automatically apply 2 to each snack in each category as the default,
+                for a starting balance of ${totalBudget - (snacks.length * defaultVotesPerSnack)}  
+                which can be effected by playing with the sliders below `} 
+              trigger={<Icon 
+                name="question circle" 
+                className='absolute right-20 top0 fs12 txtPurple opacity5' 
+              />}
+            />
+            </span>
           voice credits
           <div> to vote with on the following snacks </div>
         </span>
