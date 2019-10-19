@@ -46,7 +46,7 @@ function App() {
         <div onClick={toggleSent} className='txtBlue underline pointer'>back to example</div>
       </div> 
     : <div className="tac">
-      <div className='flex jcc aife mt30'>
+      <div className='flex jcc aife mt30 mb30'>
         <span>
           you have 
             <span className='fs1'>{remainingBalance}</span>
@@ -54,12 +54,9 @@ function App() {
           <div> to vote with on the following snacks </div>
         </span>
       </div>
-      {remainingBalance
-        ? <p className='fs16 mb30'>🤔 budget wisely my friend 🤔</p>
-        : <p className='fs16 mb30'>thank you 🥳</p>
-      }
+      {!remainingBalance && <p className='fs16 mb30'>thank you 🥳</p>}
       <div className='flex aic column'>
-      {snacks.map(snack => <div key={snack.id} className='w300 tal'>
+      {snacks.map(snack => <div key={snack.id} className='w250 tal'>
           <Typography>{snack.title}</Typography>
           <Slider
             id={snack.id}
@@ -77,7 +74,7 @@ function App() {
           id="outlined-multiline-static"
           label="Thoughts on our workplace?"
           multiline
-          className="w300 block"
+          className="w250 block"
           rows="4"
           margin="normal"
           variant="outlined"

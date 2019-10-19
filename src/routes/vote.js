@@ -13,8 +13,10 @@ import Button from '@material-ui/core/Button';
 import {chunk} from 'lodash'
 import {shuffle, mapAirtableValues, decimalIfExists} from '../utils'
 import Thankyou from '../routes/thankyou'
-import {ToastContext} from '../components'
+import {ToastContext, Highlight} from '../components'
 import {useGlobalState} from '../stores/global'
+
+console.log('terms', terms)
 
 function Vote({match}) {
   const [snacks, setSnacks] = useState([])
@@ -108,27 +110,28 @@ function Vote({match}) {
     .reduce((acc,allo) => Number(acc) + Number(allo), 0)
 
   const showTerms = () => toastContext.set({message: terms}) 
-  const handleChange = ({id, value}) => {
-    const currentAllo = Number(allos[id]) || 0
-    const hypotheticalTotal = total - currentAllo + value
-    const isDecreasing = value < currentAllo
-    const isLessThanTotal = hypotheticalTotal <= totalBudget
-    if (isDecreasing || isLessThanTotal) { 
-      setAllos({
-        ...allos, 
-        [id]: value
-      })
-    }
-  }
+  // const handleChange = ({id, value}) => {
+  //   const currentAllo = Number(allos[id]) || 0
+  //   const hypotheticalTotal = total - currentAllo + value
+  //   const isDecreasing = value < currentAllo
+  //   const isLessThanTotal = hypotheticalTotal <= totalBudget
+  //   if (isDecreasing || isLessThanTotal) { 
+  //     setAllos({
+  //       ...allos, 
+  //       [id]: value
+  //     })
+  //   }
+  // }
   const remainingBalance = decimalIfExists(totalBudget - total)
-  const oneday = 60 * 60 * 24 * 1000
-  const dayInPast = Date.now() - oneday
-  const hasVotedInPast24Hours = (dayInPast < user.lastVoteTimestamp)
+  // const oneday = 60 * 60 * 24 * 1000
+  // const dayInPast = Date.now() - oneday
+  // const hasVotedInPast24Hours = (dayInPast < user.lastVoteTimestamp)
+  const hasVotedInPast24Hours = Boolean(user.lastVoteTimestamp)
     return user.voted || hasVotedInPast24Hours
     ? <Thankyou {...user} /> 
     : <div className="App tac">
       <div className='flex jcc aife mt30'>
-        <span>
+        <span className='mb50'>
           you have 
             <span className='fs1 relative'>
             {remainingBalance}
@@ -147,13 +150,14 @@ function Vote({match}) {
             />
             </span>
           voice credits
-          <div> to vote with on the following snacks </div>
+          <div className='mb20'> to vote with on the following snacks </div>
+            {remainingBalance 
+            ? <><div className='fs14'> The information gathered may or <Highlight color='green'>may not</Highlight> </div>
+              <div className='fs14'>impact snack choices -- budget wisely 🤔</div></>
+            : <p className='fs16 mb30'>🥳 thank you 🥳</p>
+          }
         </span>
       </div>
-      {remainingBalance
-        ? <p className='fs16 mb30'>🤔 budget wisely my friend 🤔</p>
-        : <p className='fs16 mb30'>🥳 thank you 🥳</p>
-      }
       <div className='flex aic column'>
       {/* {snacks.map(snack => <div key={snack.id} className='w300 tal'>
           <Typography>{snack.title}</Typography>
@@ -192,7 +196,7 @@ function Vote({match}) {
             Send Snack Feedback
           </Button>
       </div>
-      <small className='fs10 w300 txtGray'>This app is an expirement and may or <strong className='underline'>may not</strong> impact snack choices.  Thank you for your help in making Wayfair a great place to work and snack </small>
+      <small className='fs10 w300 txtGray'>Thanks for helping make Wayfair a great place to work and snack </small>
       <p className='mb20'>🙇‍♂️</p>
       <div onClick={showTerms} className='fs10 w300 txtBlue pointer underline mb50'>terms and conditions</div>
     </div>

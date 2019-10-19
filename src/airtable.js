@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
 import Airtable from 'airtable'
-import { withRouter } from 'react-router-dom'
+// import { useState, useEffect } from 'react';
+// import { withRouter } from 'react-router-dom'
 
 // function useBase({ match }) {
 //   const [base, setBase] = useState({});

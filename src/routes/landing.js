@@ -1,17 +1,19 @@
-import React, {useRef, useState, useContext} from 'react'
+// import React, {useRef, useState, useContext} from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import Phone from '../components/Phone'
 import ExampleApp from '../static/exampleApp'
-import {ToastContext, Highlight} from '../components'
-import base from '../airtable'
+import {Highlight} from '../components'
+// import {ToastContext, Highlight} from '../components'
+// import base from '../airtable'
 import {colors} from '../static/theme'
-import IconButton from '@material-ui/core/IconButton';
-import Button from '@material-ui/core/Button';
-import { PlayArrow } from '@material-ui/icons'
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import FormControl from '@material-ui/core/FormControl';
+// import IconButton from '@material-ui/core/IconButton';
+// import Button from '@material-ui/core/Button';
+// import { PlayArrow } from '@material-ui/icons'
+// import Input from '@material-ui/core/Input';
+// import InputLabel from '@material-ui/core/InputLabel';
+// import InputAdornment from '@material-ui/core/InputAdornment';
+// import FormControl from '@material-ui/core/FormControl';
 
 const The = styled.div`
   position: absolute;
@@ -28,37 +30,37 @@ const Section = styled.div`
   background-color: ${({color})=> color};
 `
 export default () => {
-  const betaInput = useRef()
-  const workplaceInput = useRef()
-  const toastContext = useContext(ToastContext)
-  const [showBeta, setShowBeta] = useState()
-  const emailSubmit = (input) => {
-    const anchorOrigin = input.current.id === 'beta' 
-      ? { vertical: 'top', horizontal: 'center' }
-      : undefined
-    base('emails').create({
-      email: input.current.value, 
-      type: input.current.id}, 
-      function(err, record) {
-        if (err) {
-          toastContext.set({message: err.toString(), anchorOrigin})
-        } else {
-          toastContext.set({
-            message: 'Success!',
-            anchorOrigin
-          })
-          input.current.value = ''
-          setShowBeta(false)
-        }
-    });
-  }
+  // const toastContext = useContext(ToastContext)
+  // const betaInput = useRef()
+  // const workplaceInput = useRef()
+  // const [showBeta, setShowBeta] = useState()
+  // const emailSubmit = (input) => {
+  //   const anchorOrigin = input.current.id === 'beta' 
+  //     ? { vertical: 'top', horizontal: 'center' }
+  //     : undefined
+  //   base('emails').create({
+  //     email: input.current.value, 
+  //     type: input.current.id}, 
+  //     function(err, record) {
+  //       if (err) {
+  //         toastContext.set({message: err.toString(), anchorOrigin})
+  //       } else {
+  //         toastContext.set({
+  //           message: 'Success!',
+  //           anchorOrigin
+  //         })
+  //         input.current.value = ''
+  //         setShowBeta(false)
+  //       }
+  //   });
+  // }
 return <div>
   <div className='tac mt50'>
     <Section>
     <div className='relative mb50'>
       <div className='fs2 bold'> Hack</div>
       <The>- the -</The>
-      <div className='fs2 bold'>Snack</div>
+      <div className='fs2 bold mt40'>Snack</div>
     </div>
     <div className='flex column aic m0a'>
     {/* {showBeta 
@@ -90,7 +92,7 @@ return <div>
     <Section color={colors.lightBlue}>
       <div className='fs20'>Giving <Highlight>feedback</Highlight> can be boring.</div>
       <div className='fs20 mb20'>Voting on snacks is <Highlight>fun</Highlight>.</div>
-      <div className='fs20 mb10'><Highlight>Feed your culture</Highlight>.</div>
+      <div className='fs20 mb10'><Highlight color='green'>Feed your culture</Highlight>.</div>
       <span role='img' aria-label='happy' className='fs3 mt20'>🍌🥳🌮</span>
     </Section>
     <div className='pt50 pb50'>
