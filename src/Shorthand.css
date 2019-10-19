@@ -93,7 +93,7 @@
 
 .br50 { border-radius: 50%; }
 
-.fs1 { font-size: 100px; line-height: 80px; }
+.fs1 { font-size: 100px; line-height: 100px; }
 .fs2 { font-size: 50px; }
 .fs3 { font-size: 30px; }
 .fs10 { font-size: 10px; }
@@ -105,6 +105,7 @@
 .fsXLarge { font-size: x-large; }
 .fsLargert { font-size: larger; }
 .bold {font-weight: 700; }
+.italic {font-style: italic;}
 
 .relative { position: relative;}
 .absolute { position: absolute;}

@@ -16,8 +16,6 @@ import Thankyou from '../routes/thankyou'
 import {ToastContext, Highlight} from '../components'
 import {useGlobalState} from '../stores/global'
 
-console.log('terms', terms)
-
 function Vote({match}) {
   const [snacks, setSnacks] = useState([])
   const [{user}, dispatch] = useGlobalState()
@@ -152,8 +150,8 @@ function Vote({match}) {
           voice credits
           <div className='mb20'> to vote with on the following snacks </div>
             {remainingBalance 
-            ? <><div className='fs14'> The information gathered may or <Highlight color='green'>may not</Highlight> </div>
-              <div className='fs14'>impact snack choices -- budget wisely 🤔</div></>
+            ? <><div className='fs14 txtGray'> The information gathered may or <Highlight color='green'>may not</Highlight> </div>
+              <div className='fs14 txtGray mb5'>impact snack choices -- budget wisely 🤔</div></>
             : <p className='fs16 mb30'>🥳 thank you 🥳</p>
           }
         </span>
