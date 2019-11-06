@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import { withRouter } from "react-router-dom";
 import { Popup, Icon } from 'semantic-ui-react';
 import Airtable from 'airtable';
@@ -20,15 +20,36 @@ function Vote({match}) {
   const [snacks, setSnacks] = useState([])
   const [{user}, dispatch] = useGlobalState()
   const [allos, setAllos] = useState({})
+  const [config, setConfig] = useState({})
   const toastContext = useContext(ToastContext)
   const votesPerSnack = 4
   const defaultVotesPerSnack = 2
   const totalBudget = snacks.length * votesPerSnack
+
+  useEffect(()=>{
+    const initBase = new Airtable({
+      apiKey: process.env.REACT_APP_AIRTABLE_KEY
+    }).base(match.params.baseId)
+    initBase('config').select({
+      view: 'Grid view'
+    }).firstPage(function(err, records) {
+      const values = mapAirtableValues(records)
+      const set = values.reduce((acc,record) => {
+        return {...acc, [record.Name]: record.value} 
+      },{})
+      setConfig(set)
+    })
+  },[match.params.baseId])
   
   const handleSuccess = () => {
     const lastVoteTimestamp = Date.now()
     localStorage.setItem('hasa_lastVoteTimestamp', lastVoteTimestamp)
-    dispatch({ type: 'user.update', payload: {lastVoteTimestamp, voted: true}})
+    localStorage.setItem('hasa_lastVoteVersion', config.version)
+    dispatch({ type: 'user.update', payload: {
+      lastVoteTimestamp, 
+      lastVoteVersion: config.version, 
+      voted: true
+    }})
   }
 
   if (!snacks.length){
@@ -87,7 +108,7 @@ function Vote({match}) {
     const base = new Airtable({
       apiKey: process.env.REACT_APP_AIRTABLE_KEY
     }).base(match.params.baseId) 
-    base('votes').create({uid: user.uid, votes: JSON.stringify(allos)}, function(err, record) {
+    base('votes').create({uid: user.uid, version: config.version, votes: JSON.stringify(allos)}, function(err, record) {
       if (err) {
         toastContext.set({message: err.toString()})
       } else {
@@ -124,8 +145,10 @@ function Vote({match}) {
   // const oneday = 60 * 60 * 24 * 1000
   // const dayInPast = Date.now() - oneday
   // const hasVotedInPast24Hours = (dayInPast < user.lastVoteTimestamp)
-  const hasVotedInPast24Hours = Boolean(user.lastVoteTimestamp)
-    return user.voted || hasVotedInPast24Hours
+  // const hasVotedInPast24Hours = Boolean(user.lastVoteTimestamp)
+  console.log('config', config)
+  const canVote = Boolean(user.lastVoteVersion < Number(config.version))
+    return user.voted || !canVote 
     ? <Thankyou {...user} /> 
     : <div className="App tac">
       <div className='flex jcc aife mt30'>

@@ -2,6 +2,7 @@ import defaultReducer from './default'
 import {generateUID} from '../utils'
 let uid = localStorage.getItem('hasa_uid')
 const lastVoteTimestamp = localStorage.getItem('hasa_lastVoteTimestamp')
+const lastVoteVersion = localStorage.getItem('hasa_lastVoteVersion') || 0
 if (!uid) {
   uid = generateUID()
   localStorage.setItem('hasa_uid', uid)
@@ -9,7 +10,8 @@ if (!uid) {
 export const userInitialState = {
   user: { 
     uid,
-    lastVoteTimestamp
+    lastVoteTimestamp,
+    lastVoteVersion
   }
 };
 export default (state = userInitialState, action) => {
