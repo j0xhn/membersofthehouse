@@ -146,38 +146,41 @@ function Vote({match}) {
   // const dayInPast = Date.now() - oneday
   // const hasVotedInPast24Hours = (dayInPast < user.lastVoteTimestamp)
   // const hasVotedInPast24Hours = Boolean(user.lastVoteTimestamp)
-  console.log('config', config)
   const canVote = Boolean(user.lastVoteVersion < Number(config.version))
     return user.voted || !canVote 
     ? <Thankyou {...user} /> 
     : <div className="App tac">
-      <div className='flex jcc aife mt30'>
-        <span className='mb50'>
-          you have 
-            <span className='fs1 relative'>
-            {remainingBalance}
-            <Popup 
-              position='bottom right'
+      <div className='flex jcc aic column mt30'>
+      <Popup 
+              position='bottom'
               hideOnScroll
               content={`
                 Each snack in the list gives you 4 votes for a total of ${totalBudget}.  
                 We automatically apply 2 to each snack in each category as the default,
                 for a starting balance of ${totalBudget - (snacks.length * defaultVotesPerSnack)}  
                 which can be effected by playing with the sliders below `} 
-              trigger={<Icon 
-                name="question circle" 
-                className='absolute right-20 top0 fs12 txtPurple opacity5' 
-              />}
-            />
-            </span>
-          voice credits
-          <div className='mb20'> to vote with on the following snacks </div>
-            {remainingBalance 
-            ? <><div className='fs14 txtGray'> The information gathered may or <Highlight color='green'>may not</Highlight> </div>
-              <div className='fs14 txtGray mb5'>impact snack choices -- budget wisely 🤔</div></>
-            : <p className='fs16 mb30'>🥳 thank you 🥳</p>
-          }
-        </span>
+              trigger={
+            <div>
+              you have 
+                <span className='fs1 relative'>
+                {remainingBalance}
+              <Icon 
+                    name="question circle" 
+                    className='absolute right-20 top0 fs12 txtPurple opacity5' 
+                />
+                </span>
+              voice credits
+              <div className='mb20'> to vote with on the following snacks </div>
+              </div> } />
+            <div className='mb50'>
+                {remainingBalance 
+                ? <><div className='fs14 txtGray'> The information gathered may or <Highlight color='green'>may not</Highlight> </div>
+                  <div className='fs14 txtGray mb5'>impact snack options -- budget wisely 🤔</div></>
+                : <p className='fs16 mb30'>🥳 thank you 🥳</p>
+              }
+              </div>
+            
+         
       </div>
       <div className='flex aic column'>
       {/* {snacks.map(snack => <div key={snack.id} className='w300 tal'>

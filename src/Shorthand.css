@@ -100,7 +100,7 @@
 .fs12 { font-size: 12px !important; }
 .fs14 { font-size: 14px; }
 .fs16 { font-size: 16px; }
-.fs20 { font-size: 20px; }
+.fs20 { font-size: 20px !important; }
 .fsDefault { font-size: default; }
 .fsXLarge { font-size: x-large; }
 .fsLargert { font-size: larger; }
