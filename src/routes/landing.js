@@ -3,6 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Phone from '../components/Phone'
 import ExampleApp from '../static/exampleApp'
+import logo from '../static/images/logo.png'
 import {Highlight} from '../components'
 // import {ToastContext, Highlight} from '../components'
 // import base from '../airtable'
@@ -14,15 +15,6 @@ import {colors} from '../static/theme'
 // import InputLabel from '@material-ui/core/InputLabel';
 // import InputAdornment from '@material-ui/core/InputAdornment';
 // import FormControl from '@material-ui/core/FormControl';
-
-const The = styled.div`
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 48%;
-  transform: rotate(-10deg); 
-  font-weight: 600;
-`
 
 const Section = styled.div`
   margin-top: 50px;
@@ -57,11 +49,12 @@ export default () => {
 return <div>
   <div className='tac mt50'>
     <Section>
-    <div className='relative mb50'>
-      <div className='fs2 bold'> Hack</div>
-      <The>- the -</The>
-      <div className='fs2 bold mt40'>Snack</div>
-    </div>
+      <img 
+        className="mb30 mr10"
+        src={logo} 
+        width='400px' 
+        alt="logo" 
+      />
     <div className='flex column aic m0a'>
     {/* {showBeta 
       ? <FormControl>

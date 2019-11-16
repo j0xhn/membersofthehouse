@@ -103,7 +103,7 @@
 .fs20 { font-size: 20px !important; }
 .fsDefault { font-size: default; }
 .fsXLarge { font-size: x-large; }
-.fsLargert { font-size: larger; }
+.fsLarger { font-size: larger; }
 .bold {font-weight: 700; }
 .italic {font-style: italic;}
 
@@ -120,3 +120,4 @@
 
 .circle { border-radius: 50%; }
 .borderBlue { border: 3px solid blue;}
+.borderBottom { border-bottom: 1px solid gray;}

@@ -29,11 +29,11 @@ export default withRouter(({lastVoteTimestamp, match}) => {
   return <div className="pageContainer tac pt50">
     <div className='fs2 mb20'>Thank you!</div>
       <div className='mw400 m0a'>
-        This form will reset in the future and you can vote again.  <Highlight>Leave other feedback</Highlight> on how you'd like to see your workplace change below.  
+        This form will reset in the future and you can vote again.  <Highlight>Leave other feedback</Highlight> on what snacks you'd like to see or how you'd like to see your workplace change below.  
         <div className='mb20 mt20'> Happy snacking here at Wayfair :) </div>
       </div>
       {feedbackSent 
-        ? <span>Feedback Recieved</span>
+        ? <span role='img' aria-label='success'>🥳Feedback Recieved 🥳</span>
         : <>
         <div>
         <TextField

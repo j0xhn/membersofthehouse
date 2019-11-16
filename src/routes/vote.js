@@ -3,6 +3,7 @@ import React, {useState, useContext, useEffect} from 'react';
 import { withRouter } from "react-router-dom";
 import { Popup, Icon } from 'semantic-ui-react';
 import Airtable from 'airtable';
+import logo from '../static/images/logo.png'
 import '../App.css';
 import '../Shorthand.css';
 import Slider from '@material-ui/core/Slider';
@@ -21,9 +22,10 @@ function Vote({match}) {
   const [{user}, dispatch] = useGlobalState()
   const [allos, setAllos] = useState({})
   const [config, setConfig] = useState({})
+  const [loading, setLoading] = useState(true)
   const toastContext = useContext(ToastContext)
-  const votesPerSnack = 4
-  const defaultVotesPerSnack = 2
+  const votesPerSnack = 1
+  const defaultVotesPerSnack = 0
   const totalBudget = snacks.length * votesPerSnack
 
   useEffect(()=>{
@@ -63,6 +65,7 @@ function Vote({match}) {
         ? offlineData
         : mapAirtableValues(records)
       setSnacks(shuffle(mappedData))
+      setLoading(false)
       setAllos(mappedData.reduce((acc,snack)=>({
         ...acc, 
         [snack.id]: defaultVotesPerSnack})
@@ -108,7 +111,7 @@ function Vote({match}) {
     const base = new Airtable({
       apiKey: process.env.REACT_APP_AIRTABLE_KEY
     }).base(match.params.baseId) 
-    base('votes').create({uid: user.uid, version: config.version, votes: JSON.stringify(allos)}, function(err, record) {
+    base('votes').create({uid: user.uid, meta: JSON.stringify({version: config.version}), votes: JSON.stringify(allos)}, function(err, record) {
       if (err) {
         toastContext.set({message: err.toString()})
       } else {
@@ -146,41 +149,50 @@ function Vote({match}) {
   // const dayInPast = Date.now() - oneday
   // const hasVotedInPast24Hours = (dayInPast < user.lastVoteTimestamp)
   // const hasVotedInPast24Hours = Boolean(user.lastVoteTimestamp)
-  const canVote = Boolean(user.lastVoteVersion < Number(config.version))
+  if(loading){
+    return null
+  }
+  const canVote = Boolean(user.lastVoteVersion !== config.version)
     return user.voted || !canVote 
     ? <Thankyou {...user} /> 
     : <div className="App tac">
       <div className='flex jcc aic column mt30'>
+      <img 
+        className="mb30 mr10"
+        src={logo} 
+        width='200px' 
+        alt="logo" 
+      />
       <Popup 
-              position='bottom'
-              hideOnScroll
-              content={`
-                Each snack in the list gives you 4 votes for a total of ${totalBudget}.  
-                We automatically apply 2 to each snack in each category as the default,
-                for a starting balance of ${totalBudget - (snacks.length * defaultVotesPerSnack)}  
-                which can be effected by playing with the sliders below `} 
-              trigger={
-            <div>
-              you have 
-                <span className='fs1 relative'>
-                {remainingBalance}
-              <Icon 
-                    name="question circle" 
-                    className='absolute right-20 top0 fs12 txtPurple opacity5' 
-                />
-                </span>
-              voice credits
-              <div className='mb20'> to vote with on the following snacks </div>
-              </div> } />
-            <div className='mb50'>
-                {remainingBalance 
-                ? <><div className='fs14 txtGray'> The information gathered may or <Highlight color='green'>may not</Highlight> </div>
-                  <div className='fs14 txtGray mb5'>impact snack options -- budget wisely 🤔</div></>
-                : <p className='fs16 mb30'>🥳 thank you 🥳</p>
-              }
-              </div>
-            
-         
+        position='bottom center'
+        hideOnScroll
+        content={`
+          Chomp, chomp! Community Experience offers ${snacks.length} snacks in the pantry. 
+          What’s your favorite snack category? 
+          Use your voice credits to cast your vote. 
+          We attributed ${votesPerSnack} voice credit for each snack, 
+          which adds up to ${snacks.length * votesPerSnack} voice credits. 
+        `} 
+        trigger={<div>
+          you have 
+            <span className='fs1 relative'>
+            {remainingBalance}
+          <Icon 
+                name="question circle" 
+                className='absolute right-20 top0 fs12 txtPurple opacity5' 
+            />
+            </span>
+          voice credits
+          <div className='mb20'> to vote with on the following snacks </div>
+        </div>} 
+      />
+      <div className='mb50'>
+          {remainingBalance 
+          ? <><div className='fs14 txtGray'> The information gathered may or <Highlight color='green'>may not</Highlight> </div>
+            <div className='fs14 txtGray mb5'>impact snack options -- budget wisely 🤔</div></>
+          : <p className='fs16 mb30'>🥳thank you 🥳</p>
+        }
+        </div>
       </div>
       <div className='flex aic column'>
       {/* {snacks.map(snack => <div key={snack.id} className='w300 tal'>
